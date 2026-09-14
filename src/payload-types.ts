@@ -84,11 +84,15 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'about-page': AboutPage;
+  };
+  globalsSelect: {
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -122,7 +126,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -147,7 +151,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -166,7 +170,7 @@ export interface Media {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -183,20 +187,20 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -206,10 +210,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -229,7 +233,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -314,6 +318,161 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  introduction: {
+    eyebrow: string;
+    name: string;
+    role: string;
+    location: string;
+    summary: string;
+    philosophy: string;
+    /**
+     * Optional. The homepage portrait is used when no image is selected.
+     */
+    portrait?: (number | null) | Media;
+  };
+  experience: {
+    organisation: string;
+    role: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+    summary: string;
+    highlights?:
+      | {
+          detail: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  specialties: {
+    title: string;
+    description: string;
+    areas: {
+      name: string;
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  education: {
+    institution: string;
+    degree: string;
+    year: string;
+    result?: string | null;
+    id?: string | null;
+  }[];
+  certifications?:
+    | {
+        title: string;
+        issuer?: string | null;
+        year?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  languages: {
+    name: string;
+    proficiency: string;
+    id?: string | null;
+  }[];
+  contact: {
+    email: string;
+    phone: string;
+    ctaLabel: string;
+    ctaHeading: string;
+    ctaText: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  introduction?:
+    | T
+    | {
+        eyebrow?: T;
+        name?: T;
+        role?: T;
+        location?: T;
+        summary?: T;
+        philosophy?: T;
+        portrait?: T;
+      };
+  experience?:
+    | T
+    | {
+        organisation?: T;
+        role?: T;
+        location?: T;
+        startDate?: T;
+        endDate?: T;
+        summary?: T;
+        highlights?:
+          | T
+          | {
+              detail?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  specialties?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        areas?:
+          | T
+          | {
+              name?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  education?:
+    | T
+    | {
+        institution?: T;
+        degree?: T;
+        year?: T;
+        result?: T;
+        id?: T;
+      };
+  certifications?:
+    | T
+    | {
+        title?: T;
+        issuer?: T;
+        year?: T;
+        id?: T;
+      };
+  languages?:
+    | T
+    | {
+        name?: T;
+        proficiency?: T;
+        id?: T;
+      };
+  contact?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        ctaLabel?: T;
+        ctaHeading?: T;
+        ctaText?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
