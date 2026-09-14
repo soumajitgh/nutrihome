@@ -1,4 +1,7 @@
+'use client'
+
 import { ArrowDownRight, ArrowUpRight, Leaf } from 'lucide-react'
+import { motion, useReducedMotion } from 'motion/react'
 import React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -45,67 +48,135 @@ const Eyebrow = ({ children, light = false }: { children: React.ReactNode; light
 )
 
 export default function HomePage() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div className="mx-auto max-w-[1920px] overflow-hidden bg-cream text-forest">
-      <header className="relative z-20 flex h-24 items-center justify-between border-b border-forest/70 bg-cream px-5 py-2 sm:px-8 lg:h-28 lg:px-16">
-        <a className="flex h-full items-center py-1" href="#top" aria-label="Nutrihome home">
-          <img
-            className="h-[62px] w-auto max-w-[124px] object-contain sm:h-[72px] sm:max-w-[144px]"
-            src="/brand/nutrihome-logo.png"
-            alt="Nutrihome"
-          />
-        </a>
-        <nav aria-label="Primary navigation" className="flex items-center gap-6 lg:gap-12">
-          <a className="nav-link hidden sm:inline-flex" href="#about">
-            About
+      <motion.header
+        animate={{ opacity: 1, y: 0 }}
+        initial={reduceMotion ? false : { opacity: 0, y: -16 }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-20 h-20 border-b border-forest/45 bg-cream px-5 before:absolute before:inset-x-0 before:top-0 before:h-[3px] before:bg-[linear-gradient(90deg,#19332a_0_76%,#b9d84c_76%_89%,#ffd74f_89%)] before:content-[''] sm:px-8 lg:h-[84px] lg:px-12"
+      >
+        <div className="mx-auto grid h-full max-w-[1760px] grid-cols-[1fr_auto] items-center gap-5 md:grid-cols-[1fr_auto_1fr]">
+          <a className="group flex w-fit items-center gap-4" href="#top" aria-label="Nutrihome home">
+            <img
+              className="h-[52px] w-auto max-w-[105px] object-contain transition-transform duration-300 group-hover:-rotate-2 sm:h-[56px] sm:max-w-[112px]"
+              src="/brand/nutrihome-logo.png"
+              alt="Nutrihome"
+            />
+            <span className="hidden border-l border-forest/25 pl-4 font-mono text-[9px] leading-[1.45] uppercase tracking-[0.14em] text-forest/65 xl:block">
+              Personal nutrition
+              <br />
+              Thoughtfully made
+            </span>
           </a>
-          <a className="nav-link hidden sm:inline-flex" href="#services">
-            Services
-          </a>
-          <Button asChild size="sm" variant="sunny">
-            <a href="#contact">Let&apos;s talk</a>
-          </Button>
-        </nav>
-      </header>
+
+          <nav aria-label="Primary navigation" className="hidden items-center gap-2 md:flex">
+            <Button asChild className="h-8 px-5" size="sm" variant="soft">
+              <a href="#about">About</a>
+            </Button>
+            <Button asChild className="h-8 px-5" size="sm" variant="soft">
+              <a href="#services">Services</a>
+            </Button>
+          </nav>
+
+          <div className="flex justify-end">
+            <Button asChild size="sm" variant="sunny">
+              <a href="#contact">
+                Let&apos;s talk <ArrowUpRight aria-hidden="true" size={15} />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </motion.header>
 
       <main id="top">
         <section
           aria-labelledby="hero-title"
-          className="relative flex min-h-[calc(100svh-6rem)] flex-col-reverse items-center gap-10 overflow-hidden bg-lime-soft px-5 py-16 md:grid md:grid-cols-2 md:px-10 lg:min-h-[calc(100svh-7rem)] lg:px-[6vw] lg:py-24"
+          className="relative flex min-h-[calc(100svh-5rem)] flex-col-reverse items-center gap-10 overflow-hidden bg-lime-soft px-5 py-16 md:grid md:grid-cols-2 md:px-10 lg:min-h-[calc(100svh-5.25rem)] lg:px-[6vw] lg:py-24"
         >
-          <div className="relative w-full max-w-[620px] p-5 sm:p-9">
-            <span className="absolute -top-[2%] -left-[4%] aspect-square w-[65%] rounded-full bg-sun" />
-            <div className="relative h-[58svh] min-h-[450px] border border-forest bg-paper p-3 lg:h-[66vh] lg:min-h-[540px] lg:p-4">
+          <motion.div
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.96, x: -24 }}
+            transition={{ delay: 0.12, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full max-w-[620px] p-5 sm:p-9"
+          >
+            <motion.span
+              animate={reduceMotion ? undefined : { scale: [0.92, 1.02, 1] }}
+              transition={{ delay: 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute -top-[2%] -left-[4%] aspect-square w-[65%] rounded-full bg-sun"
+            />
+            <div className="relative h-[58svh] min-h-[450px] border border-forest bg-paper p-3 shadow-[10px_10px_0_rgba(25,51,42,0.08)] lg:h-[66vh] lg:min-h-[540px] lg:p-4">
               <img
-                className="h-full w-full object-cover saturate-[.78]"
-                src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=1400&q=85"
-                alt="A friendly nutrition professional smiling in a bright room"
+                className="h-full w-full object-cover object-top"
+                src="/brand/hero.png"
+                alt="A nutrition professional in a white coat holding a clipboard"
               />
             </div>
-            <span className="absolute right-1 bottom-0 rotate-[-3deg] border border-forest bg-paper px-5 py-3 font-serif text-xl italic sm:-right-3 sm:text-3xl">
+            <motion.span
+              animate={{ opacity: 1, rotate: -3, y: 0 }}
+              initial={reduceMotion ? false : { opacity: 0, rotate: 1, y: 14 }}
+              transition={{ delay: 0.65, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute right-1 bottom-0 border border-forest bg-paper px-5 py-3 font-serif text-xl italic sm:-right-3 sm:text-3xl"
+            >
               Food should feel good
-            </span>
-          </div>
+            </motion.span>
+          </motion.div>
 
-          <div className="relative z-10 max-w-[730px] md:px-5 lg:px-14">
-            <Eyebrow>Nutrition for a life well lived</Eyebrow>
-            <h1
-              className="mt-6 max-w-[800px] font-serif text-[clamp(4.2rem,7.2vw,8.7rem)] leading-[0.86] font-medium tracking-[-0.065em]"
+          <motion.div
+            animate="visible"
+            initial={reduceMotion ? false : 'hidden'}
+            variants={{
+              hidden: {},
+              visible: { transition: { delayChildren: 0.22, staggerChildren: 0.1 } },
+            }}
+            className="relative z-10 max-w-[730px] md:px-5 lg:px-14"
+          >
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 18 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+              }}
+            >
+              <Eyebrow>Nutrition for a life well lived</Eyebrow>
+            </motion.div>
+            <motion.h1
+              variants={{
+                hidden: { opacity: 0, y: 28 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              className="mt-6 max-w-[800px] font-serif text-[clamp(4.2rem,7.2vw,8.7rem)] leading-[0.84] font-medium tracking-[-0.055em]"
               id="hero-title"
             >
               Feel good about <em className="text-forest not-italic">food.</em>
-            </h1>
-            <p className="mt-9 max-w-[590px] text-lg leading-relaxed lg:text-xl">
+            </motion.h1>
+            <motion.p
+              variants={{
+                hidden: { opacity: 0, y: 18 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+              }}
+              className="mt-9 max-w-[590px] text-lg leading-relaxed lg:text-xl"
+            >
               Clear, compassionate nutrition guidance that fits real life—so you can feel energised,
               confident, and at home in your choices.
-            </p>
-            <a
+            </motion.p>
+            <motion.a
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              }}
+              whileHover={reduceMotion ? undefined : { x: 4 }}
               className="mt-8 inline-flex items-center gap-10 border-b border-forest pb-2 font-mono text-xs uppercase tracking-[0.08em]"
               href="#services"
             >
               Explore services <ArrowDownRight aria-hidden="true" size={18} />
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
 
           <div className="absolute right-[4vw] -bottom-12 hidden size-44 rotate-6 flex-col items-center justify-center rounded-full bg-forest text-cream xl:flex">
             <Leaf className="mb-1 text-sun" size={54} strokeWidth={1.5} />
@@ -176,12 +247,20 @@ export default function HomePage() {
           </div>
 
           <div className="mx-auto mt-16 grid max-w-[1640px] gap-5 md:grid-cols-3 lg:mt-20">
-            {services.map((service) => (
-              <article
-                className="group min-w-0 border border-cream bg-cream text-forest"
+            {services.map((service, index) => (
+              <motion.article
+                initial={reduceMotion ? false : { opacity: 0, y: 34 }}
+                transition={{
+                  delay: reduceMotion ? 0 : index * 0.1,
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                viewport={{ amount: 0.2, once: true }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="group flex min-w-0 flex-col border border-cream bg-cream text-forest"
                 key={service.number}
               >
-                <div className="relative h-[300px] overflow-hidden lg:h-[370px]">
+                <div className="relative h-[280px] overflow-hidden lg:h-[330px]">
                   <img
                     className="h-full w-full object-cover saturate-[.82] transition-transform duration-500 group-hover:scale-[1.025]"
                     src={service.image}
@@ -191,16 +270,16 @@ export default function HomePage() {
                     {service.number}
                   </span>
                 </div>
-                <div className="p-7 lg:min-h-[320px] lg:p-9">
-                  <h3 className="font-serif text-[clamp(2rem,2.7vw,3rem)] leading-none font-medium tracking-[-0.045em]">
+                <div className="flex flex-1 flex-col p-7 lg:min-h-[310px] lg:p-9">
+                  <h3 className="font-serif text-[clamp(2rem,2.7vw,3rem)] leading-[0.95] font-medium tracking-[-0.045em] lg:min-h-[1.9em]">
                     {service.title}
                   </h3>
-                  <p className="mt-6 leading-relaxed">{service.description}</p>
-                  <small className="mt-10 block border-t border-forest/50 pt-4 font-mono text-[10px] uppercase tracking-[0.06em]">
+                  <p className="mt-5 leading-relaxed lg:min-h-[4.8em]">{service.description}</p>
+                  <small className="mt-auto block border-t border-forest/50 pt-4 font-mono text-[10px] uppercase tracking-[0.06em]">
                     {service.detail}
                   </small>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
         </section>
