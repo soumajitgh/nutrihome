@@ -31,6 +31,9 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# local Payload SQLite data
+/.data/
+
 # vercel
 .vercel
 
