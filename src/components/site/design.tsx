@@ -142,7 +142,7 @@ export function Portrait({ about, compact = false }: { about: AboutContent; comp
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [-16, 16])
   const portrait = about.introduction.portrait
-  const src = typeof portrait === 'object' && portrait?.url ? portrait.url : '/brand/hero.png'
+  const src = typeof portrait === 'object' && portrait?.url ? portrait.url : '/home/hero.png'
   return (
     <div ref={ref} className={`portrait-composition ${compact ? 'portrait-compact' : ''}`}>
       <div className="portrait-orbit" aria-hidden="true" />
