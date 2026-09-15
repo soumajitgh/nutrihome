@@ -23,6 +23,7 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { AdminNavSlotLink as AdminNavSlotLink_d163b8959a0451f21990f645d6d93b13 } from '@/components/admin/AdminNavSlotLink'
 import { BookingsDashboard as BookingsDashboard_8ac74ce10a8f06410ae45e35258154af } from '@/components/admin/BookingsDashboard'
+import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { SlotManagementView as SlotManagementView_7b5cf58ed880d27c31d1f2f97d7059fd } from '@/components/admin/SlotManagementView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
@@ -53,6 +54,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/admin/AdminNavSlotLink#AdminNavSlotLink": AdminNavSlotLink_d163b8959a0451f21990f645d6d93b13,
   "@/components/admin/BookingsDashboard#BookingsDashboard": BookingsDashboard_8ac74ce10a8f06410ae45e35258154af,
+  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@/components/admin/SlotManagementView#SlotManagementView": SlotManagementView_7b5cf58ed880d27c31d1f2f97d7059fd,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

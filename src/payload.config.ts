@@ -10,6 +10,8 @@ import { Media } from './collections/Media'
 import { Services } from './collections/Services'
 import { Slots } from './collections/Slots'
 import { Bookings } from './collections/Bookings'
+import { Diets } from './collections/Diets'
+import { r2StoragePlugin } from './lib/r2'
 import { AboutPage } from './globals/AboutPage'
 import { seedInitialData } from './lib/seed'
 
@@ -36,7 +38,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, Services, Slots, Bookings],
+  collections: [Users, Media, Services, Slots, Bookings, Diets],
   globals: [AboutPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -52,7 +54,7 @@ export default buildConfig({
     push: true,
   }),
   sharp,
-  plugins: [],
+  plugins: [r2StoragePlugin()],
   // Payload runs onInit once when the server connects to the database. Keeping
   // the idempotent seed here makes every deployment self-initialising while
   // leaving any existing admin-edited content untouched.
