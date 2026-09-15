@@ -24,6 +24,19 @@ After you click the `Deploy` button above, you'll want to have standalone copy o
 
 That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
 
+### Booking confirmation emails
+
+Consultation bookings use Resend through Payload's email adapter. Add these variables to `.env` (or your deployment environment):
+
+```bash
+RESEND_API_KEY=re_...
+RESEND_FROM_EMAIL=bookings@your-verified-domain.com
+RESEND_FROM_NAME=Nutrihome
+BOOKING_TIMEZONE=Asia/Kolkata
+```
+
+The `RESEND_FROM_EMAIL` domain must be verified in Resend. Until an API key is configured, bookings still complete and the page reports that the confirmation email could not be delivered.
+
 #### Docker (Optional)
 
 If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.

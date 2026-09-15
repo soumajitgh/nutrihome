@@ -51,6 +51,7 @@ export function BookingWidget({ service }: BookingWidgetProps) {
   const [bookingError, setBookingError] = useState<string | null>(null)
   const [bookingResult, setBookingResult] = useState<{
     booking: { bookingDate: string; startTime: string; endTime: string }
+    email: { sent: boolean }
     calendar: { googleUrl: string; icsData: string }
   } | null>(null)
 
@@ -316,7 +317,16 @@ export function BookingWidget({ service }: BookingWidgetProps) {
                 margin: '0 0 20px',
               }}
             >
-              A confirmation has been sent to <strong>{email}</strong>.
+              {bookingResult.email.sent ? (
+                <>
+                  A confirmation has been sent to <strong>{email}</strong>.
+                </>
+              ) : (
+                <>
+                  Your booking is confirmed, but the confirmation email could not be sent. Please
+                  save the calendar details below.
+                </>
+              )}
             </p>
 
             <div

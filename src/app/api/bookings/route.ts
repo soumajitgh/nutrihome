@@ -1,6 +1,9 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { NextRequest, NextResponse } from 'next/server'
+import { createBookingConfirmationEmail } from '@/lib/booking-email'
+
+const bookingTimeZone = process.env.BOOKING_TIMEZONE || 'Asia/Kolkata'
 
 // Helper to generate Google Calendar link
 function generateGoogleCalendarUrl({
@@ -27,7 +30,8 @@ function generateGoogleCalendarUrl({
     action: 'TEMPLATE',
     text: `Consultation: ${title}`,
     dates: `${startIso}/${endIso}`,
-    details: description || `Your nutrition consultation with Maya.`,
+    details: description || 'Your nutrition consultation with Bidisha.',
+    ctz: bookingTimeZone,
   })
 
   return `https://calendar.google.com/calendar/render?${params.toString()}`
@@ -67,7 +71,7 @@ function generateIcsData({
     `DTSTART:${startIso}`,
     `DTEND:${endIso}`,
     `SUMMARY:Consultation: ${title}`,
-    `DESCRIPTION:${description || 'Nutrition consultation with Maya.'}`,
+    `DESCRIPTION:${description || 'Nutrition consultation with Bidisha.'}`,
     'STATUS:CONFIRMED',
     'END:VEVENT',
     'END:VCALENDAR',
@@ -113,7 +117,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ docs: bookings.docs, totalDocs: bookings.totalDocs })
   } catch (error: any) {
     console.error('Error fetching bookings:', error)
-    return NextResponse.json({ error: error.message || 'Failed to fetch bookings' }, { status: 500 })
+    return NextResponse.json(
+      { error: error.message || 'Failed to fetch bookings' },
+      { status: 500 },
+    )
   }
 }
 
@@ -185,7 +192,7 @@ export async function POST(req: NextRequest) {
     // 5. Generate Google Calendar URL and .ics file
     const googleUrl = generateGoogleCalendarUrl({
       title: serviceTitle,
-      description: `Nutrition Consultation with Maya.\nClient: ${clientName}\nEmail: ${clientEmail}`,
+      description: `Nutrition consultation with Bidisha.\nClient: ${clientName}\nEmail: ${clientEmail}`,
       date: slot.date,
       startTime: slot.startTime,
       endTime: slot.endTime,
@@ -193,15 +200,60 @@ export async function POST(req: NextRequest) {
 
     const icsData = generateIcsData({
       title: serviceTitle,
-      description: `Nutrition Consultation with Maya for ${clientName}`,
+      description: `Nutrition consultation with Bidisha for ${clientName}`,
       date: slot.date,
       startTime: slot.startTime,
       endTime: slot.endTime,
     })
 
+    // 6. Send the client a booking confirmation. A provider outage should not
+    // undo an otherwise successful booking, so report delivery separately.
+    let confirmationEmailSent = false
+
+    if (!process.env.RESEND_API_KEY) {
+      payload.logger.warn('Booking confirmation email skipped because RESEND_API_KEY is not set.')
+    } else {
+      try {
+        const confirmationEmail = createBookingConfirmationEmail({
+          clientName,
+          serviceTitle,
+          bookingDate: slot.date,
+          startTime: slot.startTime,
+          endTime: slot.endTime,
+          googleCalendarUrl: googleUrl,
+          timeZone: bookingTimeZone,
+        })
+
+        await payload.sendEmail({
+          to: clientEmail,
+          subject: confirmationEmail.subject,
+          text: confirmationEmail.text,
+          html: confirmationEmail.html,
+          attachments: [
+            {
+              filename: `nutrihome-consultation-${slot.date}.ics`,
+              content: Buffer.from(icsData).toString('base64'),
+              contentType: 'text/calendar; charset=utf-8',
+            },
+          ],
+        })
+
+        confirmationEmailSent = true
+      } catch (emailError) {
+        payload.logger.error({
+          err: emailError,
+          bookingId: booking.id,
+          msg: 'Failed to send booking confirmation email',
+        })
+      }
+    }
+
     return NextResponse.json({
       success: true,
       booking,
+      email: {
+        sent: confirmationEmailSent,
+      },
       calendar: {
         googleUrl,
         icsData,
@@ -232,6 +284,9 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ success: true, doc: updated })
   } catch (error: any) {
     console.error('Error updating booking status:', error)
-    return NextResponse.json({ error: error.message || 'Failed to update booking' }, { status: 500 })
+    return NextResponse.json(
+      { error: error.message || 'Failed to update booking' },
+      { status: 500 },
+    )
   }
 }
