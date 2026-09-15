@@ -7,7 +7,11 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Services } from './collections/Services'
+import { Slots } from './collections/Slots'
+import { Bookings } from './collections/Bookings'
 import { AboutPage } from './globals/AboutPage'
+import { seedInitialData } from './lib/seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,8 +22,21 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      beforeDashboard: ['@/components/admin/BookingsDashboard#BookingsDashboard'],
+      afterNavLinks: ['@/components/admin/AdminNavSlotLink#AdminNavSlotLink'],
+      views: {
+        slotManagement: {
+          Component: '@/components/admin/SlotManagementView#SlotManagementView',
+          path: '/slots-management',
+          meta: {
+            title: 'Slot Management',
+          },
+        },
+      },
+    },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Services, Slots, Bookings],
   globals: [AboutPage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -30,7 +47,16 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URL || '',
     },
+    // This project does not ship generated migrations. Push the SQLite schema
+    // on boot so a new deployment can create its tables before seeding data.
+    push: true,
   }),
   sharp,
   plugins: [],
+  // Payload runs onInit once when the server connects to the database. Keeping
+  // the idempotent seed here makes every deployment self-initialising while
+  // leaving any existing admin-edited content untouched.
+  onInit: async (payload) => {
+    await seedInitialData(payload)
+  },
 })

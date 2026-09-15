@@ -1469,6 +1469,227 @@
     font-size: 23px;
   }
 }
+/* Services Directory & Detail Styles */
+.services-hero {
+  padding: 80px 24px 40px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.services-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  margin: 16px 0 24px;
+}
+
+.services-hero p {
+  max-width: 620px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-forest);
+  opacity: 0.85;
+}
+
+.service-detail-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+}
+
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  margin-top: 40px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .service-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.service-header-card {
+  border: 1px solid var(--color-forest);
+  background: var(--color-paper);
+  padding: 36px;
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 var(--color-forest);
+}
+
+.service-header-card h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1;
+  margin: 12px 0 18px;
+}
+
+.service-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.service-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--color-forest);
+  background: var(--color-lime-soft);
+  color: var(--color-forest);
+  font-weight: 600;
+}
+
+.service-badge.price-badge {
+  background: var(--color-sun);
+}
+
+.rich-text-content {
+  margin-top: 32px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-forest);
+}
+
+.rich-text-content p {
+  margin-bottom: 20px;
+}
+
+.rich-text-content h2,
+.rich-text-content h3 {
+  font-family: var(--font-serif);
+  margin: 28px 0 14px;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.rich-text-content ul,
+.rich-text-content ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+.rich-text-content li {
+  margin-bottom: 8px;
+}
+
+.rich-text-content blockquote {
+  border-left: 3px solid var(--color-forest);
+  padding-left: 20px;
+  margin: 24px 0;
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+}
+
+/* Calendly-style Booking Widget */
+.booking-widget-card {
+  position: sticky;
+  top: 100px;
+  border: 1px solid var(--color-forest);
+  background: var(--color-paper);
+  border-radius: 4px;
+  box-shadow: 8px 8px 0 var(--color-forest);
+  overflow: hidden;
+}
+
+.booking-widget-header {
+  background: var(--color-forest);
+  color: var(--color-cream);
+  padding: 24px 28px;
+}
+
+.booking-widget-header h3 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.booking-widget-body {
+  padding: 28px;
+}
+
+.slot-day-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 6px;
+  border: 1px solid rgba(25, 51, 42, 0.2);
+  border-radius: 4px;
+  background: white;
+  transition: all 0.15s ease;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.slot-day-btn:hover:not(:disabled) {
+  border-color: var(--color-forest);
+  background: var(--color-lime-soft);
+}
+
+.slot-day-btn.active {
+  background: var(--color-forest);
+  color: var(--color-cream);
+  border-color: var(--color-forest);
+}
+
+.slot-day-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.time-chip-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border: 1px solid var(--color-forest);
+  background: white;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.time-chip-btn:hover {
+  background: var(--color-sun);
+  transform: translateY(-1px);
+}
+
+.time-chip-btn.selected {
+  background: var(--color-forest);
+  color: var(--color-cream);
+}
+
+.booking-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(25, 51, 42, 0.3);
+  background: white;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--color-forest);
+  transition: border-color 0.15s ease;
+}
+
+.booking-input:focus {
+  outline: none;
+  border-color: var(--color-forest);
+  box-shadow: 0 0 0 2px rgba(185, 216, 76, 0.4);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nutri-site *,
   .nutri-site *::before,

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Contact, Flower, Portrait, Reveal, SiteFooter, SiteHeader } from '@/components/site/design'
 import { getAboutContent } from '@/lib/about-content'
+import { getFeaturedServices } from '@/lib/services'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,7 +14,10 @@ const foodImages = [
 ]
 
 export default async function HomePage() {
-  const about = await getAboutContent()
+  const [about, services] = await Promise.all([
+    getAboutContent(),
+    getFeaturedServices(),
+  ])
   return (
     <div className="nutri-site">
       <SiteHeader />
@@ -126,51 +130,91 @@ export default async function HomePage() {
             <p>Thoughtful, personalised support for wherever you are in your health journey.</p>
           </Reveal>
           <div className="service-grid">
-            {about.specialties.map((service, i) => (
-              <Reveal
-                className={`service-card service-color-${i % 3}`}
-                key={service.title}
-                delay={i * 0.08}
-              >
-                <a
-                  href={`mailto:${about.contact.email}?subject=${encodeURIComponent(`Nutrition enquiry: ${service.title}`)}`}
-                  className="service-card-link"
+            {services.length > 0 ? (
+              services.slice(0, 3).map((service, i) => {
+                const imageUrl =
+                  typeof service.image === 'object' && service.image && 'url' in service.image && service.image.url
+                    ? service.image.url
+                    : foodImages[i % 3]
+
+                return (
+                  <Reveal
+                    className={`service-card service-color-${i % 3}`}
+                    key={service.slug || service.id}
+                    delay={i * 0.08}
+                  >
+                    <Link href={`/services/${service.slug}`} className="service-card-link">
+                      <div className="service-image">
+                        <Image
+                          unoptimized
+                          src={imageUrl}
+                          alt={service.title}
+                          width={900}
+                          height={650}
+                          loading="lazy"
+                        />
+                        <span className="service-number">0{i + 1}</span>
+                        <span className="service-arrow">
+                          <ArrowUpRight aria-hidden="true" />
+                        </span>
+                      </div>
+                      <div className="service-copy">
+                        <h3>{service.title}</h3>
+                        <p>{service.description}</p>
+                        <span className="service-bottom">
+                          Book consultation <ArrowUpRight size={17} aria-hidden="true" />
+                        </span>
+                      </div>
+                    </Link>
+                  </Reveal>
+                )
+              })
+            ) : (
+              about.specialties.map((service, i) => (
+                <Reveal
+                  className={`service-card service-color-${i % 3}`}
+                  key={service.title}
+                  delay={i * 0.08}
                 >
-                  <div className="service-image">
-                    <Image
-                      unoptimized
-                      src={foodImages[i % 3]}
-                      alt={
-                        [
-                          'Fresh ingredients for a balanced meal',
-                          'A colourful bowl of nourishing food',
-                          'Fresh vegetables ready to prepare',
-                        ][i % 3]
-                      }
-                      width={900}
-                      height={650}
-                      loading="lazy"
-                    />
-                    <span className="service-number">0{i + 1}</span>
-                    <span className="service-arrow">
-                      <ArrowUpRight aria-hidden="true" />
-                    </span>
-                  </div>
-                  <div className="service-copy">
-                    <h3>{service.title}</h3>
-                    <p>{service.description}</p>
-                    <span className="service-bottom">
-                      Let&apos;s find what works for you{' '}
-                      <ArrowUpRight size={17} aria-hidden="true" />
-                    </span>
-                  </div>
-                </a>
-              </Reveal>
-            ))}
+                  <a
+                    href={`mailto:${about.contact.email}?subject=${encodeURIComponent(`Nutrition enquiry: ${service.title}`)}`}
+                    className="service-card-link"
+                  >
+                    <div className="service-image">
+                      <Image
+                        unoptimized
+                        src={foodImages[i % 3]}
+                        alt={service.title}
+                        width={900}
+                        height={650}
+                        loading="lazy"
+                      />
+                      <span className="service-number">0{i + 1}</span>
+                      <span className="service-arrow">
+                        <ArrowUpRight aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div className="service-copy">
+                      <h3>{service.title}</h3>
+                      <p>{service.description}</p>
+                      <span className="service-bottom">
+                        Let&apos;s find what works for you{' '}
+                        <ArrowUpRight size={17} aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                </Reveal>
+              ))
+            )}
           </div>
-          <p className="services-note">
-            Not sure where to start? <a href="#contact">Let&apos;s work it out together ↗</a>
-          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px', marginTop: '36px' }}>
+            <p className="services-note" style={{ margin: 0 }}>
+              Not sure where to start? <a href="#contact">Let&apos;s work it out together ↗</a>
+            </p>
+            <Link className="pill pill-dark" href="/services">
+              View all services <ArrowUpRight size={17} aria-hidden="true" />
+            </Link>
+          </div>
         </section>
         <section className="hello-section section-pad">
           <Reveal className="hello-photo">

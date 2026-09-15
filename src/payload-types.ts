@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    services: Service;
+    slots: Slot;
+    bookings: Booking;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +81,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    slots: SlotsSelect<false> | SlotsSelect<true>;
+    bookings: BookingsSelect<false> | BookingsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -167,6 +173,113 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  /**
+   * Summary line (e.g. 60-minute consultations · tailored action plan)
+   */
+  detail: string;
+  /**
+   * Duration in minutes (e.g. 30, 45, 60)
+   */
+  duration: number;
+  /**
+   * Session price in USD (optional, leave blank for free call)
+   */
+  price?: number | null;
+  image: number | Media;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Show in the selected 3 services on the homepage
+   */
+  featuredOnHome?: boolean | null;
+  /**
+   * Display order (1, 2, 3...)
+   */
+  order?: number | null;
+  status?: ('published' | 'draft') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "slots".
+ */
+export interface Slot {
+  id: number;
+  /**
+   * Format: YYYY-MM-DD (e.g. 2026-09-20)
+   */
+  date: string;
+  /**
+   * 24-hour format: HH:mm (e.g. 09:30, 14:00)
+   */
+  startTime: string;
+  /**
+   * 24-hour format: HH:mm (e.g. 10:30, 15:00)
+   */
+  endTime: string;
+  /**
+   * Select a specific service, or leave blank for any service
+   */
+  service?: (number | null) | Service;
+  status: 'available' | 'booked' | 'blocked';
+  /**
+   * Internal notes (e.g. recurring slot, lunch break)
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookings".
+ */
+export interface Booking {
+  id: number;
+  clientName: string;
+  clientEmail: string;
+  clientPhone?: string | null;
+  service: number | Service;
+  slot: number | Slot;
+  /**
+   * Format: YYYY-MM-DD
+   */
+  bookingDate: string;
+  /**
+   * e.g. 10:00
+   */
+  startTime: string;
+  /**
+   * e.g. 11:00
+   */
+  endTime: string;
+  status: 'confirmed' | 'completed' | 'cancelled';
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -196,6 +309,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'services';
+        value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'slots';
+        value: number | Slot;
+      } | null)
+    | ({
+        relationTo: 'bookings';
+        value: number | Booking;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -278,6 +403,57 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  detail?: T;
+  duration?: T;
+  price?: T;
+  image?: T;
+  body?: T;
+  featuredOnHome?: T;
+  order?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "slots_select".
+ */
+export interface SlotsSelect<T extends boolean = true> {
+  date?: T;
+  startTime?: T;
+  endTime?: T;
+  service?: T;
+  status?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookings_select".
+ */
+export interface BookingsSelect<T extends boolean = true> {
+  clientName?: T;
+  clientEmail?: T;
+  clientPhone?: T;
+  service?: T;
+  slot?: T;
+  bookingDate?: T;
+  startTime?: T;
+  endTime?: T;
+  status?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

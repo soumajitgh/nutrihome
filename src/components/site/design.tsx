@@ -52,6 +52,12 @@ export function SiteHeader() {
           <Link href="/about" aria-current={pathname === '/about' ? 'page' : undefined}>
             About Bidisha
           </Link>
+          <Link
+            href="/services"
+            aria-current={pathname?.startsWith('/services') ? 'page' : undefined}
+          >
+            Services
+          </Link>
           <Link href="/#services">Work with me</Link>
         </nav>
         <Link className="pill header-cta" href="#contact">
@@ -84,6 +90,9 @@ export function SiteHeader() {
         </Link>
         <Link href="/about" onClick={() => setOpen(false)}>
           About Bidisha <ArrowUpRight />
+        </Link>
+        <Link href="/services" onClick={() => setOpen(false)}>
+          Services <ArrowUpRight />
         </Link>
         <Link href="/#services" onClick={() => setOpen(false)}>
           Work with me <ArrowUpRight />

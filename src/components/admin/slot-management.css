@@ -1,0 +1,74 @@
+@import 'tailwindcss/theme.css' layer(theme);
+@source './SlotManagementView.tsx';
+@source './BookingsDashboard.tsx';
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+.slot-management {
+  @tailwind utilities source(none);
+}
+
+.slot-management {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.slot-management *,
+.slot-management *::before,
+.slot-management *::after {
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0;
+}
+.slot-management h1,
+.slot-management h2,
+.slot-management h3,
+.slot-management p {
+  margin: 0;
+}
+.slot-management button,
+.slot-management input,
+.slot-management select {
+  font: inherit;
+}
+.slot-management button {
+  cursor: pointer;
+  min-height: 36px;
+}
+.slot-management .fixed > div {
+  max-height: 90dvh;
+  overflow-y: auto;
+}
+.slot-management button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.slot-management input,
+.slot-management select {
+  min-height: 40px;
+  max-width: 100%;
+  color: inherit;
+}
+.slot-management input[type='checkbox'] {
+  min-height: 18px;
+  width: 18px;
+  accent-color: #059669;
+}
+.slot-management a {
+  text-decoration: none;
+}
+.slot-management svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.slot-management :focus-visible {
+  outline: 2px solid #059669;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .slot-management select {
+    width: 100%;
+  }
+  .slot-management input {
+    font-size: 16px;
+  }
+}
