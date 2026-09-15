@@ -57,9 +57,9 @@ export default buildConfig({
       url: databaseURL,
       authToken: databaseAuthToken,
     },
-    // This project does not ship generated migrations. Push the SQLite schema
-    // on boot so a new deployment can create its tables before seeding data.
-    push: true,
+    // Development uses schema push. Production schema changes are applied once
+    // by the Vercel build migration before serverless functions start.
+    push: process.env.NODE_ENV !== 'production',
   }),
   sharp,
   plugins: [r2StoragePlugin()],
