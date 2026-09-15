@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         pathname: '/brand/**',
       },
       {
+        pathname: '/home/**',
+        search: '',
+      },
+      {
         pathname: '/api/media/file/**',
       },
     ],
