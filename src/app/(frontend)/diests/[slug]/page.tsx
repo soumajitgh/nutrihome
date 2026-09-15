@@ -25,7 +25,7 @@ export default async function DietEpisode({ params }: Props) {
   return (
     <div className="nutri-site">
       <SiteHeader />
-      <main id="main" className="section-pad diet-episode">
+      <main id="main" className="section-pad diet-episode max-w-[1440px]">
         <Link href="/diets" className="eyebrow">
           ← Back to the food diary
         </Link>

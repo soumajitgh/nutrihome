@@ -1,1 +1,3 @@
-export { default, metadata, dynamic } from '../diets/page'
+export { default, metadata } from '../diets/page'
+
+export const dynamic = 'force-dynamic'

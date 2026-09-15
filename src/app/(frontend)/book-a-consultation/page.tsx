@@ -23,7 +23,7 @@ export default async function BookingPage({
   return (
     <div className="nutri-site">
       <SiteHeader />
-      <main id="main" className="mx-auto max-w-6xl px-5 pt-10 pb-16 sm:px-7 sm:pt-16 sm:pb-24">
+      <main id="main" className="mx-auto max-w-[1440px] px-5 pt-10 pb-16 sm:px-7 sm:pt-16 sm:pb-24">
         <p className="eyebrow mb-6! text-[11px]!">LET’S MAKE TIME FOR YOU</p>
         <h1 className="text-[clamp(44px,6vw,72px)]!">Book a consultation.</h1>
         <p className="text-lg">Choose your service, find a time, and share your details.</p>

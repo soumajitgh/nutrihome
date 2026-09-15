@@ -27,7 +27,7 @@ export default async function ServicesPage() {
       <SiteHeader />
       <main id="main">
         {/* Hero Section */}
-        <section className="services-hero section-pad">
+        <section className="services-hero section-pad max-w-[1440px]">
           <Reveal>
             <p className="eyebrow">
               <span className="tiny-sun" /> Nutrition offerings & consultations

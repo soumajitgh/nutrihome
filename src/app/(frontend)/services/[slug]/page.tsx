@@ -28,7 +28,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   return (
     <div className="nutri-site">
       <SiteHeader />
-      <main id="main" className="mx-auto max-w-6xl px-5 pt-5 pb-12 sm:px-7 sm:pt-8 sm:pb-20">
+      <main id="main" className="mx-auto max-w-[1440px] px-5 pt-5 pb-12 sm:px-7 sm:pt-8 sm:pb-20">
         <Link
           className="mb-6 inline-flex min-h-11 items-center gap-2 text-sm no-underline sm:mb-10"
           href="/services"
@@ -60,7 +60,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 alt={image.alt || service.title}
                 width={1200}
                 height={750}
-                sizes="(max-width: 1152px) 100vw, 1096px"
+                sizes="(max-width: 1440px) 100vw, 1384px"
                 className="block h-auto w-full"
                 priority
                 unoptimized

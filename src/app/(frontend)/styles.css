@@ -95,7 +95,6 @@
   margin-top: 40px;
 }
 .diet-episode {
-  max-width: 1200px;
   margin: auto;
   padding-top: 36px;
   padding-bottom: 80px;
@@ -1624,7 +1623,6 @@
 /* Services Directory & Detail Styles */
 .services-hero {
   padding: 80px 24px 40px;
-  max-width: 1240px;
   margin: 0 auto;
 }
 
