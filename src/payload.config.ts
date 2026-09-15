@@ -17,6 +17,13 @@ import { seedInitialData } from './lib/seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const databaseURL =
+  process.env.DATABASE_URL || process.env.TURSO_DATABASE_URL || 'file:.data/payload.db'
+const databaseAuthToken = process.env.DATABASE_AUTH_TOKEN || process.env.TURSO_AUTH_TOKEN
+
+if (databaseURL.startsWith('libsql://') && !databaseAuthToken) {
+  throw new Error('DATABASE_AUTH_TOKEN is required when DATABASE_URL points to Turso.')
+}
 
 export default buildConfig({
   admin: {
@@ -47,7 +54,8 @@ export default buildConfig({
   },
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URL || '',
+      url: databaseURL,
+      authToken: databaseAuthToken,
     },
     // This project does not ship generated migrations. Push the SQLite schema
     // on boot so a new deployment can create its tables before seeding data.
