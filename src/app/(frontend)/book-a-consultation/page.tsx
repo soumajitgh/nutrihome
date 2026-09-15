@@ -13,12 +13,10 @@ export default async function BookingPage({
   searchParams: Promise<{ service?: string }>
 }) {
   const [services, query] = await Promise.all([getAllServices(), searchParams])
-  const options = services.map(({ id, title, slug, duration, price }) => ({
+  const options = services.map(({ id, title, slug }) => ({
     id,
     title,
     slug,
-    duration,
-    price,
   }))
   return (
     <div className="nutri-site">

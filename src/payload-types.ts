@@ -183,16 +183,10 @@ export interface Service {
   slug: string;
   description: string;
   /**
-   * Summary line (e.g. 60-minute consultations · tailored action plan)
+   * Short supporting line (e.g. Personalised guidance · tailored action plan)
    */
   detail: string;
-  /**
-   * Duration in minutes (e.g. 30, 45, 60)
-   */
   duration: number;
-  /**
-   * Session price in USD (optional, leave blank for free call)
-   */
   price?: number | null;
   image: number | Media;
   body: {

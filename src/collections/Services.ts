@@ -4,7 +4,7 @@ export const Services: CollectionConfig = {
   slug: 'services',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'duration', 'featuredOnHome', 'order', 'status'],
+    defaultColumns: ['title', 'featuredOnHome', 'order', 'status'],
   },
   access: {
     read: () => true,
@@ -58,23 +58,23 @@ export const Services: CollectionConfig = {
       type: 'text',
       required: true,
       admin: {
-        description: 'Summary line (e.g. 60-minute consultations · tailored action plan)',
+        description: 'Short supporting line (e.g. Personalised guidance · tailored action plan)',
       },
     },
     {
       name: 'duration',
       type: 'number',
       required: true,
-      defaultValue: 60,
+      defaultValue: 30,
       admin: {
-        description: 'Duration in minutes (e.g. 30, 45, 60)',
+        hidden: true,
       },
     },
     {
       name: 'price',
       type: 'number',
       admin: {
-        description: 'Session price in USD (optional, leave blank for free call)',
+        hidden: true,
       },
     },
     {

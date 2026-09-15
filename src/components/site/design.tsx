@@ -68,7 +68,7 @@ export function SiteHeader() {
           </Link>
           <Link href="/#services">Work with me</Link>
         </nav>
-        <Link className="pill header-cta" href="#contact">
+        <Link className="pill header-cta" href="/book-a-consultation">
           Let&apos;s talk <ArrowUpRight size={17} aria-hidden="true" />
         </Link>
         <button
@@ -108,7 +108,7 @@ export function SiteHeader() {
         <Link href="/#services" onClick={() => setOpen(false)}>
           Work with me <ArrowUpRight />
         </Link>
-        <Link href="#contact" onClick={() => setOpen(false)}>
+        <Link href="/book-a-consultation" onClick={() => setOpen(false)}>
           Let&apos;s talk <ArrowUpRight />
         </Link>
       </nav>
@@ -197,9 +197,9 @@ export function Contact({ contact }: { contact: AboutContent['contact'] }) {
             <em>Let&apos;s begin.</em>
           </h2>
           <p className="contact-copy">{contact.ctaText}</p>
-          <a className="pill pill-dark" href={`mailto:${contact.email}`}>
-            Start a conversation <ArrowUpRight size={19} aria-hidden="true" />
-          </a>
+          <Link className="pill pill-dark" href="/book-a-consultation">
+            Book a call <ArrowUpRight size={19} aria-hidden="true" />
+          </Link>
           <a className="contact-email" href={`mailto:${contact.email}`}>
             {contact.email}
           </a>

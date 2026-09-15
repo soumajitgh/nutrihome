@@ -8,8 +8,6 @@ interface ServiceOption {
   id: number
   title: string
   slug: string
-  duration: number
-  price?: number | null
 }
 
 export function ConsultationBooking({
@@ -45,11 +43,7 @@ export function ConsultationBooking({
           ))}
         </select>
         <h2 className="mt-8 text-[28px]! sm:text-4xl!">{selected.title}</h2>
-        <p>
-          {selected.duration}-minute consultation
-          <br />
-          {selected.price ? `$${selected.price} USD` : 'Complimentary'}
-        </p>
+        <p>30-minute consultation</p>
         <Link className="inline-block py-3 text-sm" href={`/services/${selected.slug}`}>
           Read about this service →
         </Link>

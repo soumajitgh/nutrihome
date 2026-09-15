@@ -15,15 +15,14 @@ export const DEFAULT_SERVICES = [
     slug: 'one-to-one-nutrition',
     description:
       'Personalised, realistic guidance built around your health, your routines, and the food you actually enjoy.',
-    detail: '60-minute consultations · tailored action plan',
-    duration: 60,
-    price: 120,
+    detail: 'Personalised guidance · tailored action plan',
+    duration: 30,
     imageFilename: 'nutrition-table.svg',
     imageAlt: 'One-to-one nutrition consultation table spread',
     imageColors: ['#19332a', '#b9d84c'],
     body: [
       'Our one-to-one nutrition consultations provide a compassionate, evidence-based space to explore your unique relationship with food, energy levels, and overall wellness.',
-      'During our initial 60-minute session, we will review your current lifestyle, dietary patterns, health history, and personal goals. Together, we will co-create a tailored action plan that fits naturally into your routine—no restrictive diets or calorie counting required.',
+      'During our initial session, we will review your current lifestyle, dietary patterns, health history, and personal goals. Together, we will co-create a tailored action plan that fits naturally into your routine—no restrictive diets or calorie counting required.',
       'Whether you are managing digestive discomfort, seeking sustainable energy throughout the workday, or looking to nourish your body with joyful variety, Bidisha is here to guide you every step of the way.',
     ],
   },
@@ -33,8 +32,7 @@ export const DEFAULT_SERVICES = [
     description:
       'Simple, flexible meal ideas that remove the daily guesswork without rules, restriction, or complicated prep.',
     detail: 'Seasonal plans · practical shopping support',
-    duration: 45,
-    price: 85,
+    duration: 30,
     imageFilename: 'meal-planning.svg',
     imageAlt: 'Healthy plant-based meal bowl',
     imageColors: ['#536b45', '#ffd74f'],
@@ -50,8 +48,7 @@ export const DEFAULT_SERVICES = [
     description:
       'Engaging nutrition workshops and thoughtful wellness programmes created for modern teams and communities.',
     detail: 'Talks · workshops · bespoke programmes',
-    duration: 60,
-    price: 350,
+    duration: 30,
     imageFilename: 'workplace-wellbeing.svg',
     imageAlt: 'Fresh green vegetables for workplace wellness',
     imageColors: ['#315746', '#e4efbd'],
@@ -143,10 +140,10 @@ function nextWeekdayAppointments(): AppointmentTime[] {
     if (date.getDay() === 0 || date.getDay() === 6) continue
     const dateString = date.toISOString().slice(0, 10)
     for (const [startTime, endTime] of [
-      ['10:00', '11:00'],
-      ['11:30', '12:30'],
-      ['14:00', '15:00'],
-      ['16:00', '17:00'],
+      ['10:00', '10:30'],
+      ['11:30', '12:00'],
+      ['14:00', '14:30'],
+      ['16:00', '16:30'],
     ] as const) {
       appointments.push({ date: dateString, startTime, endTime })
     }
@@ -186,7 +183,6 @@ async function runSeed(payload: Payload): Promise<SeedSummary> {
         description: service.description,
         detail: service.detail,
         duration: service.duration,
-        price: service.price,
         image,
         featuredOnHome: true,
         order: index + 1,

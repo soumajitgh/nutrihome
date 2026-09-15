@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, Clock, Sparkles } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { Reveal, SiteFooter, SiteHeader } from '@/components/site/design'
 import { getAllServices } from '@/lib/services'
 
@@ -88,42 +88,8 @@ export default async function ServicesPage() {
                       className="service-copy"
                       style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
                     >
-                      <div
-                        style={{
-                          display: 'flex',
-                          gap: '8px',
-                          flexWrap: 'wrap',
-                          marginBottom: '12px',
-                        }}
-                      >
-                        <span className="service-badge">
-                          <Clock size={12} aria-hidden="true" /> {service.duration} mins
-                        </span>
-                        {service.price ? (
-                          <span className="service-badge price-badge">${service.price}</span>
-                        ) : (
-                          <span className="service-badge" style={{ background: '#e0f2fe' }}>
-                            <Sparkles size={12} aria-hidden="true" /> Free Consultation
-                          </span>
-                        )}
-                      </div>
-
                       <h3>{service.title}</h3>
                       <p style={{ minHeight: '60px' }}>{service.description}</p>
-
-                      {service.detail && (
-                        <p
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '11px',
-                            opacity: 0.8,
-                            margin: '12px 0',
-                            letterSpacing: '0.02em',
-                          }}
-                        >
-                          {service.detail}
-                        </p>
-                      )}
 
                       <span
                         className="service-bottom"

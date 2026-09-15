@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowUpRight, Clock } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SiteFooter, SiteHeader } from '@/components/site/design'
 import { getServiceBySlug } from '@/lib/services'
@@ -42,14 +42,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               {service.title}
             </h1>
             <p className="text-lg text-[#536152] sm:text-xl">{service.description}</p>
-            <div className="mt-6 mb-3.5 flex flex-wrap gap-6 text-sm">
-              <span className="flex items-center gap-2">
-                <Clock size={16} /> {service.duration} minutes
-              </span>
-              <span>{service.price ? `$${service.price} USD` : 'Complimentary'}</span>
-            </div>
-            {service.detail && <p className="mb-6 text-sm text-[#536152]">{service.detail}</p>}
-            <Link className="pill pill-dark min-h-12 gap-6!" href={bookingUrl}>
+            <Link className="pill pill-dark mt-6 min-h-12 gap-6!" href={bookingUrl}>
               Book now <ArrowUpRight size={18} />
             </Link>
           </header>
@@ -78,10 +71,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           >
             <div>
               <h2 className="text-[28px]!">{service.title}</h2>
-              <p className="mb-0 text-sm">
-                {service.duration} minutes
-                {service.price ? ` · $${service.price} USD` : ' · Complimentary'}
-              </p>
             </div>
             <Link className="pill pill-dark min-h-12 shrink-0 gap-6!" href={bookingUrl}>
               Book now <ArrowUpRight size={18} />

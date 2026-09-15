@@ -29,8 +29,6 @@ interface BookingWidgetProps {
   service: {
     id: number
     title: string
-    duration: number
-    price?: number | null
     slug: string
   }
 }
@@ -275,8 +273,7 @@ export function BookingWidget({ service }: BookingWidgetProps) {
         </div>
         <h3 className="mt-2 text-[28px]!">Book your consultation</h3>
         <p style={{ fontSize: '13px', opacity: 0.9, marginTop: '4px', margin: 0 }}>
-          {service.duration} mins session ·{' '}
-          {service.price ? `$${service.price}` : 'Free discovery call'}
+          30-minute consultation
         </p>
       </div>
 
@@ -439,7 +436,7 @@ export function BookingWidget({ service }: BookingWidgetProps) {
                 <strong>Time:</strong> {selectedSlot.startTime} – {selectedSlot.endTime}
               </div>
               <div>
-                <strong>Duration:</strong> {service.duration} mins
+                <strong>Duration:</strong> 30 mins
               </div>
             </div>
 

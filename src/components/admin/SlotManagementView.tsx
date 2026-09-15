@@ -27,7 +27,7 @@ export function SlotManagementView() {
   const [endDate, setEndDate] = useState(localDate)
   const [startTime, setStartTime] = useState('09:00')
   const [endTime, setEndTime] = useState('17:00')
-  const [duration, setDuration] = useState(60)
+  const [duration, setDuration] = useState(30)
   const [days, setDays] = useState([0, 1, 2, 3, 4, 5, 6])
   const [slots, setSlots] = useState<Slot[]>([])
   const [loading, setLoading] = useState(true)
@@ -263,7 +263,7 @@ export function SlotManagementView() {
               />
             </label>
             <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-              For example: 9 AM–5 PM with 60-minute appointments creates 8 slots per day.
+              For example: 9 AM–5 PM with 30-minute appointments creates 16 slots per day.
             </p>
             <button
               type="submit"

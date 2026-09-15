@@ -84,8 +84,16 @@ describe('default service seed', () => {
     expect(firstRun.createdSlots).toBeGreaterThan(0)
     expect(secondRun).toBe(firstRun)
     expect(stores.services).toHaveLength(DEFAULT_SERVICES.length)
+    expect(stores.services.every((service) => service.duration === 30)).toBe(true)
     expect(stores.media).toHaveLength(DEFAULT_SERVICES.length)
     expect(stores.slots.every((slot) => slot.status === 'available')).toBe(true)
+    expect(
+      stores.slots.every((slot) => {
+        const [startHour, startMinute] = String(slot.startTime).split(':').map(Number)
+        const [endHour, endMinute] = String(slot.endTime).split(':').map(Number)
+        return endHour * 60 + endMinute - (startHour * 60 + startMinute) === 30
+      }),
+    ).toBe(true)
     expect(payload.create).toHaveBeenCalledTimes(
       DEFAULT_SERVICES.length * 2 + firstRun.createdSlots,
     )
