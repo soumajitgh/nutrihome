@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowUpRight, Leaf, Menu, X } from 'lucide-react'
+import { ArrowUpRight, Leaf, LockKeyhole, Menu, X } from 'lucide-react'
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -214,24 +214,59 @@ export function Contact({ contact }: { contact: AboutContent['contact'] }) {
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
-      <div className="footer-top">
-        <Link href="/" aria-label="Nutrihome home">
-          <Image src="/brand/nutrihome-logo.png" alt="Nutrihome" width={128} height={70} />
-        </Link>
-        <p>
-          A little science. A lot of care.
-          <br />
-          <em>A healthier kind of everyday.</em>
-        </p>
-        <Link href="/about">
-          Meet Bidisha <ArrowUpRight size={17} aria-hidden="true" />
-        </Link>
-      </div>
-      <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Nutrihome</span>
-        <span>Practical nutrition. Personal to you.</span>
-        <a href="#main">Back to top ↑</a>
+    <footer className="site-footer border-t border-[#19332a1f] bg-[#e4efbd59] px-5! py-10! sm:px-7! lg:py-14!">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="grid gap-9 pb-10 md:grid-cols-[minmax(0,1.3fr)_auto] md:items-end lg:gap-16">
+          <div>
+            <Link className="inline-flex" href="/" aria-label="Nutrihome home">
+              <Image src="/brand/nutrihome-logo.png" alt="Nutrihome" width={148} height={81} />
+            </Link>
+            <p className="mt-5 max-w-2xl font-serif text-[clamp(30px,4vw,58px)] leading-[1.02]! tracking-[-0.035em]">
+              A little science. A lot of care.
+              <br />
+              <em>A healthier kind of everyday.</em>
+            </p>
+          </div>
+          <Link className="pill pill-dark min-h-12 w-fit gap-8!" href="/book-a-consultation">
+            Book a call <ArrowUpRight size={19} aria-hidden="true" />
+          </Link>
+        </div>
+
+        <div className="grid gap-8 border-t border-[#19332a24] py-8 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto]">
+          <nav aria-label="Footer navigation">
+            <p className="eyebrow mb-4!">Explore</p>
+            <div className="flex flex-col items-start gap-3 text-sm">
+              <Link href="/about">About Bidisha</Link>
+              <Link href="/services">Services</Link>
+              <Link href="/diets">Food diary</Link>
+            </div>
+          </nav>
+          <nav aria-label="Footer consultation links">
+            <p className="eyebrow mb-4!">Start here</p>
+            <div className="flex flex-col items-start gap-3 text-sm">
+              <Link href="/book-a-consultation">Book a consultation</Link>
+              <Link href="/#approach">Our approach</Link>
+              <Link href="/#contact">Contact</Link>
+            </div>
+          </nav>
+          <div className="sm:col-span-2 lg:col-span-1 lg:text-right">
+            <p className="eyebrow mb-4! lg:justify-end">Practice</p>
+            <Link
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#19332a40] px-4 text-xs font-semibold"
+              href="/admin"
+            >
+              <LockKeyhole size={14} aria-hidden="true" /> Admin login
+            </Link>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3 border-t border-[#19332a24] pt-6 text-[10px] tracking-[0.08em] uppercase sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} Nutrihome</span>
+          <span>Practical nutrition. Personal to you.</span>
+          <a className="w-fit" href="#main">
+            Back to top ↑
+          </a>
+        </div>
       </div>
     </footer>
   )
