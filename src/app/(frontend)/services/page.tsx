@@ -24,9 +24,6 @@ export default async function ServicesPage() {
         {/* Hero Section */}
         <section className="services-hero section-pad max-w-[1440px]">
           <Reveal>
-            <p className="eyebrow">
-              <span className="tiny-sun" /> Nutrition offerings & consultations
-            </p>
             <h1>
               Support shaped <br />
               around <em>your life.</em>

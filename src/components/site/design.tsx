@@ -214,56 +214,61 @@ export function Contact({ contact }: { contact: AboutContent['contact'] }) {
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer border-t border-[#19332a1f] bg-[#e4efbd59] px-5! py-10! sm:px-7! lg:py-14!">
+    <footer className="border-t border-[#19332a1f] bg-[#e4efbd59] px-[6vw] pt-9 pb-[22px] max-[700px]:px-5 max-[700px]:pt-[26px] max-[700px]:pb-[18px]">
       <div className="mx-auto max-w-[1440px]">
-        <div className="grid gap-9 pb-10 md:grid-cols-[minmax(0,1.3fr)_auto] md:items-end lg:gap-16">
-          <div>
-            <Link className="inline-flex" href="/" aria-label="Nutrihome home">
-              <Image src="/brand/nutrihome-logo.png" alt="Nutrihome" width={148} height={81} />
+        <div className="grid grid-cols-[minmax(280px,1.5fr)_0.7fr_0.7fr_auto] items-start gap-[clamp(28px,4vw,64px)] pb-[30px] max-[900px]:grid-cols-2 max-[900px]:gap-x-8 max-[900px]:gap-y-6 max-[700px]:gap-x-5 max-[700px]:pb-[22px]">
+          <div className="max-[900px]:col-span-2 max-[700px]:grid max-[700px]:grid-cols-[78px_1fr] max-[700px]:items-center max-[700px]:gap-[17px]">
+            <Link href="/" aria-label="Nutrihome home">
+              <Image
+                className="h-auto w-[100px] object-contain max-[700px]:w-[78px]"
+                src="/brand/nutrihome-logo.png"
+                alt="Nutrihome"
+                width={112}
+                height={61}
+              />
             </Link>
-            <p className="mt-5 max-w-2xl font-serif text-[clamp(30px,4vw,58px)] leading-[1.02]! tracking-[-0.035em]">
+            <p className="mt-[15px] max-w-[420px] font-serif text-[clamp(21px,2.2vw,31px)] leading-[1.08] tracking-[-0.025em] max-[700px]:mt-0 max-[700px]:text-lg">
               A little science. A lot of care.
               <br />
               <em>A healthier kind of everyday.</em>
             </p>
           </div>
-          <Link className="pill pill-dark min-h-12 w-fit gap-8!" href="/book-a-consultation">
-            Book a call <ArrowUpRight size={19} aria-hidden="true" />
-          </Link>
-        </div>
-
-        <div className="grid gap-8 border-t border-[#19332a24] py-8 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto]">
           <nav aria-label="Footer navigation">
-            <p className="eyebrow mb-4!">Explore</p>
-            <div className="flex flex-col items-start gap-3 text-sm">
+            <p className="eyebrow mb-[13px]!">Explore</p>
+            <div className="flex flex-col items-start gap-[9px] text-xs [&_a:hover]:underline [&_a:hover]:underline-offset-4">
               <Link href="/about">About Bidisha</Link>
               <Link href="/services">Services</Link>
               <Link href="/diets">Food diary</Link>
             </div>
           </nav>
           <nav aria-label="Footer consultation links">
-            <p className="eyebrow mb-4!">Start here</p>
-            <div className="flex flex-col items-start gap-3 text-sm">
+            <p className="eyebrow mb-[13px]!">Start here</p>
+            <div className="flex flex-col items-start gap-[9px] text-xs [&_a:hover]:underline [&_a:hover]:underline-offset-4">
               <Link href="/book-a-consultation">Book a consultation</Link>
               <Link href="/#approach">Our approach</Link>
               <Link href="/#contact">Contact</Link>
             </div>
           </nav>
-          <div className="sm:col-span-2 lg:col-span-1 lg:text-right">
-            <p className="eyebrow mb-4! lg:justify-end">Practice</p>
+          <div className="flex flex-col items-end gap-3 max-[900px]:col-span-2 max-[900px]:flex-row max-[900px]:items-center max-[900px]:justify-between">
             <Link
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#19332a40] px-4 text-xs font-semibold"
+              className="pill pill-dark min-h-[43px]! gap-4! px-[17px]! py-2.5! text-[11px]! max-[700px]:min-h-10!"
+              href="/book-a-consultation"
+            >
+              Book a call <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+            <Link
+              className="inline-flex items-center gap-[7px] text-[10px] hover:underline hover:underline-offset-4"
               href="/admin"
             >
-              <LockKeyhole size={14} aria-hidden="true" /> Admin login
+              <LockKeyhole size={13} aria-hidden="true" /> Admin login
             </Link>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-[#19332a24] pt-6 text-[10px] tracking-[0.08em] uppercase sm:flex-row sm:items-center sm:justify-between">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-[18px] border-t border-[#19332a25] pt-[18px] font-mono text-[8px] tracking-[0.05em] uppercase max-[700px]:grid-cols-[1fr_auto] max-[700px]:gap-x-4 max-[700px]:gap-y-[9px] max-[700px]:pt-[15px] max-[700px]:text-[7px]">
           <span>© {new Date().getFullYear()} Nutrihome</span>
-          <span>Practical nutrition. Personal to you.</span>
-          <a className="w-fit" href="#main">
+          <span className="max-[700px]:hidden">Practical nutrition. Personal to you.</span>
+          <a className="justify-self-end hover:underline hover:underline-offset-4" href="#main">
             Back to top ↑
           </a>
         </div>

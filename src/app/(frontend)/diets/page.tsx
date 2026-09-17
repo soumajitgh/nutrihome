@@ -25,9 +25,6 @@ export default async function DietsPage({
       <SiteHeader />
       <main id="main">
         <section className="services-hero section-pad max-w-[1440px]">
-          <p className="eyebrow">
-            <span className="tiny-sun" /> The Nutrihome food diary
-          </p>
           <h1>
             Simple ideas for <em>everyday meals.</em>
           </h1>
