@@ -4,14 +4,14 @@ type SeededAboutPage = Omit<AboutPage, 'createdAt' | 'id' | 'updatedAt'>
 
 export const aboutPageSeedData = {
   introduction: {
-    eyebrow: 'Clinical nutrition, made personal',
+    eyebrow: 'Meet your nutritionist',
     name: 'Bidisha Das',
-    role: 'Clinical Nutritionist · Gut Health Expert',
+    role: 'Nutritionist · Digestive health support',
     location: 'Kolkata, India',
     summary:
-      'I am a clinical nutritionist and gut health expert with more than four years of experience across clinical, healthcare, and corporate nutrition settings. My work brings together medical nutrition therapy, careful clinical assessment, and practical, personalised nutrition planning.',
+      'Hi, I’m Bidisha. I help people understand what to eat, manage digestive problems, and build eating habits that fit their daily lives. Together, we make a plan around your health, your routine, and the food you enjoy.',
     philosophy:
-      'I look beyond one-size-fits-all advice to understand symptoms, dietary patterns, clinical reports, and everyday routines—then turn that picture into clear, sustainable steps that support long-term wellbeing.',
+      'First, I listen to your concerns and learn about your meals, routine, and health history. Then we choose a few manageable changes. At follow-ups, we check what is working and adjust your plan together.',
   },
   experience: [
     {
@@ -21,7 +21,7 @@ export const aboutPageSeedData = {
       startDate: 'November 2025',
       endDate: 'Present',
       summary:
-        'Individualised clinical nutrition care for psychiatric patients, shaped around nutritional status, dietary patterns, medication considerations, and broader health needs.',
+        'I help people receiving mental health care plan meals around their health needs, medicines, and daily routines.',
       highlights: [
         { detail: 'Develop personalised nutrition plans and provide dietary counselling.' },
         { detail: 'Support sustainable dietary adherence and nutrition-related behaviour change.' },
@@ -35,7 +35,7 @@ export const aboutPageSeedData = {
       startDate: 'October 2024',
       endDate: 'August 2025',
       summary:
-        'Specialist nutrition guidance for gastrointestinal wellness, digestive symptoms, dietary triggers, and condition-specific interventions.',
+        'I helped people with digestive problems understand their food triggers and make changes to their meals.',
       highlights: [
         { detail: 'Worked with gastritis, GERD, IBS, ulcers, dysbiosis, and other GI concerns.' },
         { detail: 'Designed personalised protocols using functional foods and prebiotics.' },
@@ -52,8 +52,7 @@ export const aboutPageSeedData = {
       location: 'Remote',
       startDate: 'August 2023',
       endDate: 'January 2024',
-      summary:
-        'Personalised nutrition and lifestyle counselling for women’s health and weight-management needs.',
+      summary: 'I supported women with meal plans for their health needs and weight goals.',
       highlights: [
         { detail: 'Supported clients with PCOS/PCOD, endometriosis, and lifestyle concerns.' },
         { detail: 'Created individual plans around health needs, goals, and dietary patterns.' },
@@ -67,7 +66,7 @@ export const aboutPageSeedData = {
       startDate: 'July 2022',
       endDate: 'January 2023',
       summary:
-        'Hospital-based clinical nutrition experience supporting cardiac and critically ill patients across the nutrition care process.',
+        'During my hospital training, I helped the care team plan nutrition for heart patients and people recovering from surgery.',
       highlights: [
         { detail: 'Supported medical nutrition therapy and nutrition care in ICU/CCU settings.' },
         { detail: 'Calculated requirements for pre- and post-operative patients.' },
@@ -82,40 +81,33 @@ export const aboutPageSeedData = {
     {
       title: 'Gut & digestive health',
       description:
-        'Finding useful links between food, symptoms, clinical context, and the gut microbiome.',
+        'Help understanding how your meals may relate to bloating, acidity, and other digestive problems.',
       areas: [
-        { name: 'Gastritis & GERD' },
-        { name: 'IBS & digestive symptoms' },
-        { name: 'Ulcer-related nutrition' },
-        { name: 'Dysbiosis & microbiome nutrition' },
-        { name: 'Dietary trigger identification' },
-        { name: 'Functional foods & prebiotics' },
+        { name: 'Acidity and acid reflux' },
+        { name: 'Bloating and irritable bowel syndrome (IBS)' },
+        { name: 'Finding foods that trigger symptoms' },
       ],
     },
     {
-      title: 'Clinical nutrition',
+      title: 'Eating with a health condition',
       description:
-        'Evidence-led assessment and nutrition planning for complex, condition-specific needs.',
+        'Meal plans that take your health condition, medical reports, and treatment into account.',
       areas: [
-        { name: 'Medical nutrition therapy' },
-        { name: 'Clinical nutrition assessment' },
-        { name: 'Laboratory report interpretation' },
-        { name: 'Cardiac nutrition' },
-        { name: 'ICU/CCU nutrition support' },
-        { name: 'Pre- & post-operative nutrition' },
+        { name: 'Nutrition for heart health' },
+        { name: 'Eating before and after surgery' },
+        { name: 'Meal planning around your medical needs' },
       ],
     },
     {
-      title: 'Personalised wellbeing',
+      title: 'Everyday eating habits',
       description:
-        'Realistic counselling and follow-up designed for the person, not just the diagnosis.',
+        'Simple changes to your meals, with regular support to help you stick with them.',
       areas: [
         { name: 'Women’s health nutrition' },
         { name: 'PCOS/PCOD & endometriosis' },
         { name: 'Weight management' },
-        { name: 'Patient education' },
-        { name: 'Dietary adherence' },
-        { name: 'Sustainable behaviour change' },
+        { name: 'Understanding your food choices' },
+        { name: 'Building habits you can keep' },
       ],
     },
   ],
@@ -154,8 +146,8 @@ export const aboutPageSeedData = {
     email: 'dasbidisha228@gmail.com',
     phone: '+91 7001880119',
     ctaLabel: 'Work with Bidisha',
-    ctaHeading: 'Let’s make nutrition feel clear and achievable.',
+    ctaHeading: 'Need help with your meals?',
     ctaText:
-      'Whether you are navigating digestive symptoms or looking for thoughtful clinical nutrition support, we can begin with a conversation about what you need.',
+      'Tell me about your health concerns and what you would like to change. We can work out the next step together.',
   },
 } satisfies SeededAboutPage

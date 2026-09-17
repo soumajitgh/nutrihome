@@ -3,6 +3,8 @@ import type { CollectionConfig } from 'payload'
 export const Services: CollectionConfig = {
   slug: 'services',
   admin: {
+    group: 'Website content',
+    description: 'Create and edit the services visitors can book.',
     useAsTitle: 'title',
     defaultColumns: ['title', 'featuredOnHome', 'order', 'status'],
   },
@@ -11,18 +13,68 @@ export const Services: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
+      type: 'collapsible',
+      label: 'Service information',
+      fields: [
+        {
+          name: 'title',
+          label: 'Service name',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'description',
+          label: 'Short introduction',
+          type: 'textarea',
+          required: true,
+          admin: {
+            description: 'A short summary shown on service cards and at the top of the page.',
+          },
+        },
+        {
+          name: 'detail',
+          label: 'What is included',
+          type: 'text',
+          required: true,
+          admin: { description: 'For example: Personal advice and a meal plan.' },
+        },
+        {
+          name: 'body',
+          label: 'Full service description',
+          type: 'richText',
+          required: true,
+          admin: { description: 'Explain who this is for, what happens, and how you can help.' },
+        },
+      ],
+    },
+    {
+      type: 'collapsible',
+      label: 'Photo (optional)',
+      fields: [
+        {
+          name: 'image',
+          label: 'Service photo',
+          type: 'upload',
+          relationTo: 'media',
+          filterOptions: { mimeType: { contains: 'image/' } },
+          admin: {
+            description:
+              'Choose a photo for the card and page background. Leave empty to use the default nutrition illustration.',
+          },
+        },
+      ],
     },
     {
       name: 'slug',
+      label: 'Page link',
       type: 'text',
       required: true,
       unique: true,
       index: true,
       admin: {
         position: 'sidebar',
+        description:
+          'Created from the name automatically. Only change it if you need a different web address.',
       },
       hooks: {
         beforeValidate: [
@@ -49,19 +101,6 @@ export const Services: CollectionConfig = {
       },
     },
     {
-      name: 'description',
-      type: 'textarea',
-      required: true,
-    },
-    {
-      name: 'detail',
-      type: 'text',
-      required: true,
-      admin: {
-        description: 'Short supporting line (e.g. Personalised guidance · tailored action plan)',
-      },
-    },
-    {
       name: 'duration',
       type: 'number',
       required: true,
@@ -78,41 +117,34 @@ export const Services: CollectionConfig = {
       },
     },
     {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
-      name: 'body',
-      type: 'richText',
-      required: true,
-    },
-    {
       name: 'featuredOnHome',
+      label: 'Show on the homepage',
       type: 'checkbox',
       defaultValue: true,
       admin: {
-        description: 'Show in the selected 3 services on the homepage',
+        description:
+          'The first three selected services appear on the homepage, sorted by display position.',
         position: 'sidebar',
       },
     },
     {
       name: 'order',
+      label: 'Display position',
       type: 'number',
       defaultValue: 1,
       admin: {
         position: 'sidebar',
-        description: 'Display order (1, 2, 3...)',
+        description: 'Smaller numbers appear first: 1, then 2, then 3.',
       },
     },
     {
       name: 'status',
+      label: 'Visibility',
       type: 'select',
       defaultValue: 'published',
       options: [
-        { label: 'Published', value: 'published' },
-        { label: 'Draft', value: 'draft' },
+        { label: 'Visible on the website', value: 'published' },
+        { label: 'Hidden draft', value: 'draft' },
       ],
       admin: {
         position: 'sidebar',

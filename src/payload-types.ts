@@ -174,21 +174,25 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Create and edit the services visitors can book.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services".
  */
 export interface Service {
   id: number;
   title: string;
-  slug: string;
+  /**
+   * A short summary shown on service cards and at the top of the page.
+   */
   description: string;
   /**
-   * Short supporting line (e.g. Personalised guidance · tailored action plan)
+   * For example: Personal advice and a meal plan.
    */
   detail: string;
-  duration: number;
-  price?: number | null;
-  image: number | Media;
+  /**
+   * Explain who this is for, what happens, and how you can help.
+   */
   body: {
     root: {
       type: string;
@@ -205,11 +209,21 @@ export interface Service {
     [k: string]: unknown;
   };
   /**
-   * Show in the selected 3 services on the homepage
+   * Choose a photo for the card and page background. Leave empty to use the default nutrition illustration.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Created from the name automatically. Only change it if you need a different web address.
+   */
+  slug: string;
+  duration: number;
+  price?: number | null;
+  /**
+   * The first three selected services appear on the homepage, sorted by display position.
    */
   featuredOnHome?: boolean | null;
   /**
-   * Display order (1, 2, 3...)
+   * Smaller numbers appear first: 1, then 2, then 3.
    */
   order?: number | null;
   status?: ('published' | 'draft') | null;
@@ -275,19 +289,21 @@ export interface Booking {
   createdAt: string;
 }
 /**
+ * Share meal ideas and food tips. The latest three published articles appear on the homepage.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "diets".
  */
 export interface Diet {
   id: number;
   title: string;
-  slug: string;
-  excerpt: string;
-  cover: number | Media;
   /**
-   * Upload an MP4 or WebM episode. The body can also be used as a transcript.
+   * A short summary shown on cards and at the top of the article.
    */
-  video?: (number | null) | Media;
+  excerpt: string;
+  /**
+   * Write your meal ideas, food tips, or the written version of your video here.
+   */
   body: {
     root: {
       type: string;
@@ -304,10 +320,25 @@ export interface Diet {
     [k: string]: unknown;
   };
   /**
-   * Watch time in minutes
+   * Used on the card and as the page background. Leave empty to use the default nutrition illustration.
+   */
+  cover?: (number | null) | Media;
+  /**
+   * Optional. Upload an MP4 or WebM video for visitors to watch.
+   */
+  video?: (number | null) | Media;
+  /**
+   * For example, enter 5 for a five-minute video.
    */
   duration?: number | null;
+  /**
+   * Created from the title automatically. Only change it if you need a different web address.
+   */
+  slug: string;
   category: 'everyday' | 'kitchen' | 'wellbeing';
+  /**
+   * The date shown on the article. Newer articles appear first. Use Publish to make an article visible.
+   */
   publishedAt: string;
   updatedAt: string;
   createdAt: string;
@@ -449,13 +480,13 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
   description?: T;
   detail?: T;
+  body?: T;
+  image?: T;
+  slug?: T;
   duration?: T;
   price?: T;
-  image?: T;
-  body?: T;
   featuredOnHome?: T;
   order?: T;
   status?: T;
@@ -500,12 +531,12 @@ export interface BookingsSelect<T extends boolean = true> {
  */
 export interface DietsSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
   excerpt?: T;
+  body?: T;
   cover?: T;
   video?: T;
-  body?: T;
   duration?: T;
+  slug?: T;
   category?: T;
   publishedAt?: T;
   updatedAt?: T;

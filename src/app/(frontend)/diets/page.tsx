@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, Play } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { SiteHeader, SiteFooter } from '@/components/site/design'
-import { dietCategories, getDiets } from '@/lib/diets'
+import { getDiets } from '@/lib/diets'
+import { DietCard } from '@/components/site/DietCard'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
@@ -29,14 +29,9 @@ export default async function DietsPage({
             <span className="tiny-sun" /> The Nutrihome food diary
           </p>
           <h1>
-            Good food.
-            <br />
-            <em>Real life.</em>
+            Simple ideas for <em>everyday meals.</em>
           </h1>
-          <p>
-            A seat at my table. Kitchen stories, everyday meals, and little moments that make eating
-            well feel natural.
-          </p>
+          <p>Easy meal ideas, shopping tips, and practical ways to enjoy the food you eat.</p>
         </section>
         <section className="section-pad diet-list" aria-label="Diet episodes">
           <div className="diet-section-heading">
@@ -57,36 +52,9 @@ export default async function DietsPage({
             </div>
           ) : (
             <div className="diet-grid">
-              {episodes.docs.map((episode) => {
-                const cover = typeof episode.cover === 'object' ? episode.cover : null
-                return (
-                  <Link className="diet-card" href={`/diests/${episode.slug}`} key={episode.id}>
-                    <div className="diet-thumbnail">
-                      {cover?.url && (
-                        <Image
-                          src={cover.url}
-                          alt={cover.alt}
-                          width={960}
-                          height={540}
-                          unoptimized
-                        />
-                      )}
-                      <span className="diet-play">
-                        <Play size={22} aria-hidden="true" />
-                      </span>
-                      {episode.duration && (
-                        <span className="diet-duration">{episode.duration} min</span>
-                      )}
-                    </div>
-                    <p className="eyebrow">{dietCategories[episode.category]}</p>
-                    <h3>{episode.title}</h3>
-                    <p>{episode.excerpt}</p>
-                    <span className="service-bottom">
-                      {episode.video ? 'Watch episode' : 'Read story'} <ArrowUpRight size={18} />
-                    </span>
-                  </Link>
-                )
-              })}
+              {episodes.docs.map((episode, i) => (
+                <DietCard key={episode.id} diet={episode} index={i} />
+              ))}
             </div>
           )}
           <nav className="diet-pagination" aria-label="Episode pages">

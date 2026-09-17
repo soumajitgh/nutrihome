@@ -7,6 +7,26 @@
   padding-top: 0;
   padding-bottom: 80px;
 }
+.featured-diets {
+  background: var(--color-lime-soft);
+  padding-block: 64px;
+}
+.featured-diets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+.nutri-site .section-view-all {
+  min-height: 52px;
+  flex-shrink: 0;
+  font-size: 14px;
+  gap: 24px;
+}
+@media (max-width: 800px) {
+  .featured-diets-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .diet-section-heading {
   display: flex;
   align-items: center;
@@ -20,62 +40,45 @@
 }
 .diet-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 40px 24px;
 }
 .diet-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
   min-width: 0;
 }
-.diet-thumbnail {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border-radius: 12px;
-  background: var(--color-lime-soft);
-  margin-bottom: 22px;
+.diet-card.service-card:nth-child(2) {
+  margin: 0;
 }
-.diet-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 250ms;
+.diet-card.service-color-0 {
+  background: var(--color-paper);
 }
-.diet-card:hover img {
-  transform: scale(1.03);
+.diet-card .diet-card-image {
+  height: 160px;
+  aspect-ratio: auto;
+}
+.diet-card .service-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.diet-card .service-bottom {
+  margin-top: auto;
+}
+.diet-card .service-copy > p:not(.eyebrow) {
+  margin-bottom: 24px;
+  font-size: 14px;
 }
 .diet-card:focus-visible {
   outline: 3px solid var(--color-forest);
-  outline-offset: 7px;
+  outline-offset: 6px;
 }
-.diet-play {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+.services-section .section-view-all {
   background: var(--color-sun);
-}
-.diet-duration {
-  position: absolute;
-  right: 14px;
-  bottom: 18px;
-  background: var(--color-forest);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 4px;
-}
-.diet-card h3 {
-  font-size: 30px;
-  margin: 12px 0;
-  overflow-wrap: anywhere;
-}
-.diet-card > p:not(.eyebrow) {
-  color: #536152;
-  line-height: 1.6;
+  color: var(--color-forest);
 }
 .diet-empty {
   background: var(--color-lime-soft);
@@ -100,8 +103,7 @@
   padding-bottom: 80px;
 }
 .diet-episode article header {
-  max-width: 850px;
-  margin: 44px 0 32px;
+  margin: 0 0 32px;
 }
 .diet-episode h1 {
   font-size: clamp(42px, 7vw, 80px);
@@ -110,12 +112,14 @@
   overflow-wrap: anywhere;
 }
 .diet-intro {
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1.5;
   margin-bottom: 20px;
   color: #536152;
 }
 .diet-player {
+  max-width: 780px;
+  margin-inline: auto;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 44px;
@@ -126,7 +130,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 75vh;
+  max-height: 420px;
   object-fit: contain;
 }
 .diet-body {
@@ -138,6 +142,10 @@
   max-width: 100%;
   height: auto;
 }
+.diet-cover-strip img {
+  height: 160px;
+  object-fit: cover;
+}
 @media (max-width: 950px) {
   .diet-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -146,11 +154,6 @@
 @media (max-width: 600px) {
   .diet-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .diet-thumbnail img {
-    transition: none;
   }
 }
 
@@ -309,17 +312,17 @@
   font-weight: 500;
 }
 .nutri-site h1 {
-  font-size: clamp(4.4rem, 8.7vw, 9rem);
-  line-height: 0.94;
-  letter-spacing: -0.065em;
+  font-size: clamp(2.25rem, 4.2vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
 }
 .nutri-site h2 {
-  font-size: clamp(2.8rem, 5.1vw, 5.5rem);
+  font-size: clamp(1.75rem, 2.8vw, 2.75rem);
   line-height: 1.02;
   letter-spacing: -0.045em;
 }
 .nutri-site h3 {
-  font-size: clamp(1.7rem, 2.5vw, 2.3rem);
+  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
@@ -651,6 +654,13 @@
   font-size: clamp(20px, 2.3vw, 31px);
   white-space: nowrap;
 }
+.ribbon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-width: 0;
+}
 .values-ribbon svg {
   width: 28px;
   flex-shrink: 0;
@@ -822,6 +832,32 @@
   gap: 8px;
   font-size: 10px;
 }
+.service-book-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  padding: 13px 20px;
+  margin-top: auto;
+  border-radius: 999px;
+  background: var(--color-forest);
+  color: var(--color-paper);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.service-book-button:hover,
+.service-card-link:hover .service-book-button {
+  background: #315746;
+}
+.service-book-button:focus-visible {
+  outline: 3px solid var(--color-forest);
+  outline-offset: 4px;
+}
+.service-card > .service-book-button {
+  margin: 0 26px 26px;
+}
 .services-note {
   text-align: center;
   font-size: 11px;
@@ -834,6 +870,8 @@
   text-underline-offset: 4px;
 }
 .hello-section {
+  background: var(--color-cream);
+  color: var(--color-forest);
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -952,8 +990,8 @@
   transform: rotate(-6deg);
 }
 .contact-section h2 {
-  font-size: clamp(3.7rem, 6.7vw, 7rem);
-  line-height: 0.96;
+  font-size: clamp(1.75rem, 2.8vw, 2.75rem);
+  line-height: 1.1;
 }
 .contact-section h2 em {
   color: var(--color-forest);
@@ -1018,7 +1056,7 @@
   background: radial-gradient(ellipse at 90% 40%, #e4efbdb0, transparent 60%);
 }
 .about-hero h1 {
-  font-size: clamp(4rem, 7.4vw, 8rem);
+  font-size: clamp(2.25rem, 4.2vw, 4rem);
 }
 .about-hero h1 em {
   display: block;
@@ -1348,10 +1386,10 @@
     font-size: 15px;
   }
   .nutri-site h1 {
-    font-size: clamp(4.2rem, 14vw, 6.3rem);
+    font-size: clamp(2.25rem, 8vw, 3rem);
   }
   .nutri-site h2 {
-    font-size: clamp(2.65rem, 9vw, 4rem);
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
   }
   .eyebrow {
     font-size: 9px;
@@ -1411,16 +1449,22 @@
   }
   .values-ribbon {
     display: grid;
-    grid-template-columns: 1fr 24px 1fr 24px;
-    gap: 14px 12px;
-    padding: 19px 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 20px;
+    padding: 16px 20px;
   }
   .values-ribbon span {
-    font-size: 20px;
+    font-size: 16px;
+    line-height: 1.25;
     white-space: normal;
   }
   .values-ribbon svg {
-    width: 22px;
+    width: 16px;
+    height: 16px;
+  }
+  .ribbon-item {
+    min-height: 40px;
+    gap: 10px;
   }
   .approach-heading {
     text-align: left;
@@ -1561,7 +1605,7 @@
     text-align: left;
   }
   .contact-section h2 {
-    font-size: clamp(3.6rem, 12vw, 5.3rem);
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
   }
   .site-footer {
     padding: 30px 24px 24px;
@@ -1594,7 +1638,7 @@
     padding-top: 42px;
   }
   .about-hero h1 {
-    font-size: clamp(4rem, 13vw, 6rem);
+    font-size: clamp(2.25rem, 8vw, 3rem);
   }
   .about-hero-copy > p:not(.eyebrow) {
     font-size: 13px;
@@ -1622,14 +1666,14 @@
 }
 /* Services Directory & Detail Styles */
 .services-hero {
-  padding: 80px 24px 40px;
+  padding: 48px 24px 24px;
   margin: 0 auto;
 }
 
 .services-hero h1 {
   font-family: var(--font-serif);
-  font-size: clamp(3.2rem, 6vw, 5.5rem);
-  line-height: 0.95;
+  font-size: clamp(2.25rem, 4.2vw, 4rem);
+  line-height: 1.08;
   margin: 16px 0 24px;
 }
 
@@ -1645,6 +1689,56 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 40px 24px 100px;
+}
+
+.service-intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 44px);
+  border-radius: 16px;
+  background: var(--color-lime-soft);
+}
+.service-intro-image {
+  object-fit: cover;
+  opacity: 0.12;
+  z-index: -2;
+}
+.service-intro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--color-cream) 30%, #f7f4e970);
+  z-index: -1;
+}
+.service-intro-copy {
+  width: 100%;
+}
+.service-intro-meta {
+  margin-top: 16px;
+  font-size: 13px;
+}
+.service-reading-body {
+  margin: 36px 0;
+  padding-inline: clamp(24px, 4vw, 44px);
+}
+.detail-footer {
+  padding-inline: clamp(24px, 4vw, 44px);
+}
+.detail-back {
+  margin-inline: clamp(24px, 4vw, 44px);
+}
+.service-reading-page .diet-player {
+  max-width: none;
+  margin-inline: clamp(24px, 4vw, 44px);
+}
+.nutri-site .diet-episode h1,
+.nutri-site .service-intro h1 {
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.1;
+}
+.nutri-site .diet-card h3 {
+  font-size: 24px;
 }
 
 .service-detail-grid {

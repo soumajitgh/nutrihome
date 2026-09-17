@@ -1,6 +1,7 @@
 import type { Payload } from 'payload'
 
 import type { AppointmentTime } from './availability'
+import { DEFAULT_DIETS } from '../seed/dietsData'
 
 /**
  * Safe defaults for a new Nutrihome installation.
@@ -153,11 +154,13 @@ function nextWeekdayAppointments(): AppointmentTime[] {
 
 export interface SeedSummary {
   createdServices: string[]
+  createdDiets: string[]
   createdSlots: number
 }
 
 async function runSeed(payload: Payload): Promise<SeedSummary> {
   const createdServices: string[] = []
+  const createdDiets: string[] = []
 
   for (const [index, service] of DEFAULT_SERVICES.entries()) {
     const existing = await payload.find({
@@ -209,7 +212,36 @@ async function runSeed(payload: Payload): Promise<SeedSummary> {
     }
   }
 
-  return { createdServices, createdSlots }
+  for (const diet of DEFAULT_DIETS) {
+    const existing = await payload.find({
+      collection: 'diets',
+      where: { slug: { equals: diet.slug } },
+      limit: 1,
+      depth: 0,
+      draft: true,
+    })
+    if (existing.docs[0]) continue
+    const cover = await getOrCreateMedia(
+      payload,
+      `diet-${diet.category}.svg`,
+      `Illustration for ${diet.category} meal ideas`,
+      ['#e4efbd', '#536b45'],
+      'Nutrihome',
+    )
+    await payload.create({
+      collection: 'diets',
+      data: {
+        ...diet,
+        body: createLexicalContent(diet.body),
+        cover,
+        _status: 'published',
+        publishedAt: new Date().toISOString(),
+      },
+    })
+    createdDiets.push(diet.slug)
+  }
+
+  return { createdServices, createdSlots, createdDiets }
 }
 
 const seedRuns = new WeakMap<object, Promise<SeedSummary>>()
@@ -221,9 +253,9 @@ export function seedInitialData(payload: Payload): Promise<SeedSummary> {
 
   const run = runSeed(payload)
     .then((summary) => {
-      if (summary.createdServices.length || summary.createdSlots) {
+      if (summary.createdServices.length || summary.createdSlots || summary.createdDiets.length) {
         payload.logger.info(
-          `Seeded ${summary.createdServices.length} default service(s) and ${summary.createdSlots} starter slot(s).`,
+          `Seeded ${summary.createdServices.length} service(s), ${summary.createdDiets.length} diet article(s), and ${summary.createdSlots} starter slot(s).`,
         )
       }
       return summary

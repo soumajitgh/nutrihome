@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal, SiteFooter, SiteHeader } from '@/components/site/design'
 import { getAllServices } from '@/lib/services'
+import { contentImage } from '@/lib/content-image'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,12 +13,6 @@ export const metadata: Metadata = {
   description:
     'Explore our personalised nutrition consultations, meal planning guides, and workplace wellness sessions.',
 }
-
-const foodImages = [
-  'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=85',
-  'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85',
-  'https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=900&q=85',
-]
 
 export default async function ServicesPage() {
   const services = await getAllServices()
@@ -51,13 +46,7 @@ export default async function ServicesPage() {
             style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))' }}
           >
             {services.map((service, index) => {
-              const imageUrl =
-                typeof service.image === 'object' &&
-                service.image &&
-                'url' in service.image &&
-                service.image.url
-                  ? service.image.url
-                  : foodImages[index % foodImages.length]
+              const imageUrl = contentImage(service.image).src
 
               return (
                 <Reveal
@@ -98,6 +87,12 @@ export default async function ServicesPage() {
                         Read more <ArrowUpRight size={17} aria-hidden="true" />
                       </span>
                     </div>
+                  </Link>
+                  <Link
+                    className="service-book-button"
+                    href={`/book-a-consultation?service=${encodeURIComponent(service.slug)}`}
+                  >
+                    Book consultation <ArrowUpRight size={17} aria-hidden="true" />
                   </Link>
                 </Reveal>
               )

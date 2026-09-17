@@ -1,9 +1,12 @@
-import { ArrowDown, ArrowUpRight, Heart, Leaf, Sprout } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Leaf } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Contact, Flower, Portrait, Reveal, SiteFooter, SiteHeader } from '@/components/site/design'
 import { getAboutContent } from '@/lib/about-content'
 import { getFeaturedServices } from '@/lib/services'
+import { contentImage } from '@/lib/content-image'
+import { getDiets } from '@/lib/diets'
+import { DietCard } from '@/components/site/DietCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,7 +17,11 @@ const foodImages = [
 ]
 
 export default async function HomePage() {
-  const [about, services] = await Promise.all([getAboutContent(), getFeaturedServices()])
+  const [about, services, diets] = await Promise.all([
+    getAboutContent(),
+    getFeaturedServices(),
+    getDiets(),
+  ])
   return (
     <div className="nutri-site">
       <SiteHeader />
@@ -58,60 +65,55 @@ export default async function HomePage() {
             </div>
           </Reveal>
           <Portrait about={about} />
-          <a className="scroll-cue" href="#approach">
-            <ArrowDown size={17} aria-hidden="true" /> A fresh perspective
+          <a className="scroll-cue" href="#about-bidisha">
+            <ArrowDown size={17} aria-hidden="true" /> Meet Bidisha
           </a>
         </section>
         <div className="values-ribbon">
-          <span>Real food</span>
-          <Flower />
-          <span>Small steps</span>
-          <Flower />
-          <span>More joy</span>
-          <Flower />
-          <span>Your kind of healthy</span>
-          <Flower />
+          {['Real food', 'Small steps', 'More joy', 'Your kind of healthy'].map((value) => (
+            <div className="ribbon-item" key={value}>
+              <span>{value}</span>
+              <Flower />
+            </div>
+          ))}
         </div>
-        <section className="approach-section section-pad" id="approach">
-          <Reveal className="approach-heading">
-            <p className="eyebrow">A little less overwhelm. A lot more you.</p>
-            <h2>
-              Healthy doesn&apos;t have
+        <section className="hello-section section-pad" id="about-bidisha">
+          <Reveal className="hello-photo">
+            <Image
+              src="/home/holding_fruits.png"
+              alt={`${about.introduction.name} holding a colourful selection of fresh fruit and vegetables`}
+              width={1122}
+              height={1402}
+              loading="lazy"
+              sizes="(max-width: 700px) 100vw, 50vw"
+            />
+            <div className="photo-sticker">
+              A full plate.
               <br />
-              to mean <em>complicated.</em>
-            </h2>
-            <p>
-              Food is culture, comfort, connection. Let&apos;s make space for all of it, while
-              finding what works for your health.
-            </p>
+              <em>A fuller life.</em>
+            </div>
           </Reveal>
-          <div className="principles-grid">
-            {[
-              {
-                icon: Sprout,
-                title: 'Real life comes first',
-                text: 'Your routines, your favourite meals, your starting point. That’s where we begin.',
-              },
-              {
-                icon: Leaf,
-                title: 'Small shifts. Big meaning.',
-                text: 'Practical, manageable changes that you can carry into an ordinary Tuesday.',
-              },
-              {
-                icon: Heart,
-                title: 'Care without judgement',
-                text: 'A place to ask questions, feel heard, and build confidence in your own choices.',
-              },
-            ].map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.08} className="principle">
-                <span className="principle-icon">
-                  <item.icon strokeWidth={1.4} aria-hidden="true" />
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="hello-copy">
+            <p className="eyebrow">The person behind Nutrihome</p>
+            <h2>
+              Hi, I&apos;m
+              <br />
+              <em>{about.introduction.name.split(' ')[0]}.</em>
+              <Flower />
+            </h2>
+            <p className="hello-role">{about.introduction.role}</p>
+            <p>
+              I believe good nutrition should feel like a helping hand. I bring clinical experience
+              and a curious, compassionate approach to understanding you and your everyday life.
+            </p>
+            <p>
+              We&apos;ll connect the science with the food on your plate, one achievable step at a
+              time.
+            </p>
+            <Link className="pill pill-outline" href="/book-a-consultation">
+              Book a call <ArrowUpRight size={19} aria-hidden="true" />
+            </Link>
+          </Reveal>
         </section>
         <section className="services-section section-pad" id="services">
           <Reveal className="section-heading">
@@ -123,18 +125,14 @@ export default async function HomePage() {
                 <em>A world of difference.</em>
               </h2>
             </div>
-            <p>Thoughtful, personalised support for wherever you are in your health journey.</p>
+            <Link className="pill pill-dark section-view-all" href="/services">
+              View all services <ArrowUpRight size={19} aria-hidden="true" />
+            </Link>
           </Reveal>
           <div className="service-grid">
             {services.length > 0
               ? services.slice(0, 3).map((service, i) => {
-                  const imageUrl =
-                    typeof service.image === 'object' &&
-                    service.image &&
-                    'url' in service.image &&
-                    service.image.url
-                      ? service.image.url
-                      : foodImages[i % 3]
+                  const imageUrl = contentImage(service.image).src
 
                   return (
                     <Reveal
@@ -163,7 +161,7 @@ export default async function HomePage() {
                         <div className="service-copy">
                           <h3>{service.title}</h3>
                           <p>{service.description}</p>
-                          <span className="service-bottom">
+                          <span className="service-book-button">
                             Book consultation <ArrowUpRight size={17} aria-hidden="true" />
                           </span>
                         </div>
@@ -223,78 +221,28 @@ export default async function HomePage() {
             </Link>
           </div>
         </section>
-        <section className="hello-section section-pad">
-          <Reveal className="hello-photo">
-            <Image
-              src="/home/holding_fruits.png"
-              alt={`${about.introduction.name} holding a colourful selection of fresh fruit and vegetables`}
-              width={1122}
-              height={1402}
-              loading="lazy"
-              sizes="(max-width: 700px) 100vw, 50vw"
-            />
-            <div className="photo-sticker">
-              A full plate.
-              <br />
-              <em>A fuller life.</em>
+        <section className="featured-diets section-pad" aria-labelledby="featured-diets-title">
+          <Reveal className="section-heading">
+            <div>
+              <p className="eyebrow">Featured diets</p>
+              <h2 id="featured-diets-title">
+                Ideas for <em>everyday eating.</em>
+              </h2>
             </div>
-          </Reveal>
-          <Reveal className="hello-copy">
-            <p className="eyebrow">The person behind Nutrihome</p>
-            <h2>
-              Hi, I&apos;m
-              <br />
-              <em>{about.introduction.name.split(' ')[0]}.</em>
-              <Flower />
-            </h2>
-            <p className="hello-role">{about.introduction.role}</p>
-            <p>
-              I believe good nutrition should feel like a helping hand. I bring clinical experience
-              and a curious, compassionate approach to understanding you and your everyday life.
-            </p>
-            <p>
-              We&apos;ll connect the science with the food on your plate, one achievable step at a
-              time.
-            </p>
-            <Link className="pill pill-outline" href="/book-a-consultation">
-              Book a call <ArrowUpRight size={19} aria-hidden="true" />
+            <Link className="pill pill-dark section-view-all" href="/diets">
+              View all diets <ArrowUpRight size={19} aria-hidden="true" />
             </Link>
           </Reveal>
-        </section>
-        <section className="steps-section section-pad">
-          <Reveal>
-            <p className="eyebrow">A simple place to start</p>
-            <h2>
-              Your next chapter,
-              <br />
-              <em>one step at a time.</em>
-            </h2>
-          </Reveal>
-          <div className="steps-grid">
-            {[
-              [
-                'Let’s get to know you',
-                'Share your story, your routines, and what you’d like support with.',
-              ],
-              [
-                'Make a plan that fits',
-                'Together, we turn your needs into clear, practical next steps.',
-              ],
-              [
-                'Find your own rhythm',
-                'Build confidence, notice what works, and adjust along the way.',
-              ],
-            ].map(([title, text], i) => (
-              <Reveal className="step" key={title} delay={i * 0.08}>
-                <span>
-                  0{i + 1}
-                  <ArrowUpRight aria-hidden="true" />
-                </span>
-                <h3>{title}</h3>
-                <p>{text}</p>
+          <div className="featured-diets-grid">
+            {diets.docs.slice(0, 3).map((diet, i) => (
+              <Reveal key={diet.id} delay={i * 0.08}>
+                <DietCard diet={diet} index={i} />
               </Reveal>
             ))}
           </div>
+          {diets.docs.length === 0 && (
+            <p>New meal ideas are coming soon. Visit the food diary for updates.</p>
+          )}
         </section>
         <Contact contact={about.contact} />
       </main>

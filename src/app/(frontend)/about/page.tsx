@@ -30,7 +30,7 @@ export default async function About() {
               {introduction.location}
             </span>
             <a className="pill pill-dark" href="#contact">
-              Let&apos;s get to know you, too <ArrowUpRight size={18} aria-hidden="true" />
+              Get in touch <ArrowUpRight size={18} aria-hidden="true" />
             </a>
           </Reveal>
           <Portrait about={about} compact />
@@ -39,9 +39,7 @@ export default async function About() {
           <Reveal>
             <p className="eyebrow">My approach</p>
             <h2>
-              Science with
-              <br />
-              <em>a human side.</em>
+              Advice that fits <em>your life.</em>
             </h2>
           </Reveal>
           <Reveal>
@@ -61,14 +59,10 @@ export default async function About() {
             <div>
               <p className="eyebrow">How I can help</p>
               <h2>
-                Expertise that feels
-                <br />
-                <em>approachable.</em>
+                How I can <em>help you.</em>
               </h2>
             </div>
-            <p>
-              Care that considers the whole person, with space for your questions and your goals.
-            </p>
+            <p>Support with digestion, health conditions, and everyday eating habits.</p>
           </Reveal>
           <div className="expertise-grid">
             {about.specialties.map((specialty, i) => (
@@ -82,7 +76,7 @@ export default async function About() {
                 <p>{specialty.description}</p>
                 <details>
                   <summary>
-                    Explore areas of support <Plus size={17} aria-hidden="true" />
+                    What I can help with <Plus size={17} aria-hidden="true" />
                   </summary>
                   <ul>
                     {specialty.areas.map((area) => (
@@ -103,14 +97,10 @@ export default async function About() {
             <div>
               <p className="eyebrow">Professional experience</p>
               <h2 id="experience-heading">
-                Care in practice.
-                <br />
-                <em>Experience that matters.</em>
+                My <em>experience.</em>
               </h2>
             </div>
-            <p>
-              From hospital nutrition to digestive wellness, a career centred on personalised care.
-            </p>
+            <p>I have worked with people in hospitals, online, and in one-to-one consultations.</p>
           </Reveal>
           <div className="professional-timeline">
             {about.experience.map((position, index) => (
@@ -129,13 +119,6 @@ export default async function About() {
                     <h3>{position.role}</h3>
                     <p className="position-organisation">{position.organisation}</p>
                     <p>{position.summary}</p>
-                    {position.highlights?.length ? (
-                      <ul>
-                        {position.highlights.map((highlight) => (
-                          <li key={highlight.id ?? highlight.detail}>{highlight.detail}</li>
-                        ))}
-                      </ul>
-                    ) : null}
                   </div>
                 </article>
               </Reveal>
@@ -144,16 +127,11 @@ export default async function About() {
         </section>
         <section className="credentials-section section-pad" id="education">
           <Reveal className="credentials-intro">
-            <p className="eyebrow">A foundation you can trust</p>
+            <p className="eyebrow">Qualifications</p>
             <h2>
-              Education.
-              <br />
-              <em>Everyday care.</em>
+              My <em>education.</em>
             </h2>
-            <p>
-              A background in clinical, hospital, and personalised nutrition. Always learning,
-              always listening.
-            </p>
+            <p>My training in food and nutrition helps me give you practical, informed advice.</p>
           </Reveal>
           <Reveal className="credentials-content">
             <p className="eyebrow">Education & credentials</p>

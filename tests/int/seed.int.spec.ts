@@ -2,8 +2,9 @@ import type { Payload } from 'payload'
 import { describe, expect, it, vi } from 'vitest'
 
 import { DEFAULT_SERVICES, seedInitialData } from '@/lib/seed'
+import { DEFAULT_DIETS } from '@/seed/dietsData'
 
-type SeedCollection = 'services' | 'media' | 'slots'
+type SeedCollection = 'services' | 'media' | 'slots' | 'diets'
 type SeedDoc = Record<string, unknown> & { id: number }
 
 function createPayloadStub() {
@@ -11,6 +12,7 @@ function createPayloadStub() {
     services: [],
     media: [],
     slots: [],
+    diets: [],
   }
   let nextId = 1
 
@@ -85,7 +87,9 @@ describe('default service seed', () => {
     expect(secondRun).toBe(firstRun)
     expect(stores.services).toHaveLength(DEFAULT_SERVICES.length)
     expect(stores.services.every((service) => service.duration === 30)).toBe(true)
-    expect(stores.media).toHaveLength(DEFAULT_SERVICES.length)
+    expect(stores.media).toHaveLength(DEFAULT_SERVICES.length + 3)
+    expect(stores.diets).toHaveLength(DEFAULT_DIETS.length)
+    expect(stores.diets.every((diet) => diet._status === 'published')).toBe(true)
     expect(stores.slots.every((slot) => slot.status === 'available')).toBe(true)
     expect(
       stores.slots.every((slot) => {
@@ -95,7 +99,7 @@ describe('default service seed', () => {
       }),
     ).toBe(true)
     expect(payload.create).toHaveBeenCalledTimes(
-      DEFAULT_SERVICES.length * 2 + firstRun.createdSlots,
+      DEFAULT_SERVICES.length * 2 + firstRun.createdSlots + DEFAULT_DIETS.length + 3,
     )
   })
 
@@ -111,5 +115,16 @@ describe('default service seed', () => {
 
     expect(summary.createdServices).toEqual(DEFAULT_SERVICES.slice(1).map(({ slug }) => slug))
     expect(stores.services.find((service) => service.id === 999)?.title).toBe('Edited in Payload')
+  })
+
+  it('preserves existing diet content, including unpublished drafts', async () => {
+    const { payload, stores } = createPayloadStub()
+    stores.diets.push({ id: 999, slug: DEFAULT_DIETS[0].slug, title: 'My draft', _status: 'draft' })
+    const summary = await seedInitialData(payload)
+    expect(summary.createdDiets).toEqual(DEFAULT_DIETS.slice(1).map(({ slug }) => slug))
+    expect(stores.diets.find(({ id }) => id === 999)).toMatchObject({
+      title: 'My draft',
+      _status: 'draft',
+    })
   })
 })

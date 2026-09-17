@@ -42,7 +42,7 @@ export function ConsultationBooking({
             </option>
           ))}
         </select>
-        <h2 className="mt-8 text-[28px]! sm:text-4xl!">{selected.title}</h2>
+        <h2 className="mt-8 text-[26px]!">{selected.title}</h2>
         <p>30-minute consultation</p>
         <Link className="inline-block py-3 text-sm" href={`/services/${selected.slug}`}>
           Read about this service →
