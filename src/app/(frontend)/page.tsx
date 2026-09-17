@@ -66,16 +66,16 @@ export default async function HomePage() {
             <ArrowDown size={17} aria-hidden="true" /> Meet Bidisha
           </a>
         </section>
-        <div className="values-ribbon max-[700px]:flex-nowrap! max-[700px]:justify-between! max-[700px]:gap-[7px]! max-[700px]:px-3! max-[700px]:py-3.5!">
+        <div className="flex items-center justify-around gap-6 border-y border-[#19332a20] bg-[var(--color-lime)] px-[5%] py-[22px] max-[700px]:flex-nowrap max-[700px]:justify-between max-[700px]:gap-[7px] max-[700px]:px-3 max-[700px]:py-3.5">
           {['Real food', 'Small steps', 'More joy', 'Your kind of healthy'].map((value) => (
             <div
-              className="ribbon-item max-[700px]:min-h-6! max-[700px]:shrink-0! max-[700px]:gap-[5px]!"
+              className="flex min-w-0 items-center justify-between gap-6 max-[700px]:min-h-6 max-[700px]:shrink-0 max-[700px]:gap-[5px]"
               key={value}
             >
-              <span className="max-[700px]:text-[clamp(9px,2.75vw,12px)]! max-[700px]:leading-tight! max-[700px]:whitespace-nowrap!">
+              <span className="font-serif text-[clamp(20px,2.3vw,31px)] whitespace-nowrap max-[700px]:text-[clamp(9px,2.75vw,12px)] max-[700px]:leading-tight">
                 {value}
               </span>
-              <Flower className="max-[700px]:size-2.5!" />
+              <Flower className="w-7 shrink-0 text-[var(--color-forest)] max-[700px]:size-2.5" />
             </div>
           ))}
         </div>
@@ -118,7 +118,7 @@ export default async function HomePage() {
           </Reveal>
         </section>
         <section className="services-section section-pad" id="services">
-          <Reveal className="section-heading max-[700px]:flex! max-[700px]:items-end! max-[700px]:gap-3!">
+          <Reveal className="mb-12 flex items-end justify-between gap-10 max-[700px]:mb-[30px] max-[700px]:gap-3">
             <div className="max-[700px]:min-w-0 max-[700px]:flex-1">
               <p className="eyebrow">Ways to work together</p>
               <h2 className="max-[700px]:text-[clamp(1.45rem,6vw,1.75rem)]!">
@@ -128,7 +128,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <Link
-              className="pill pill-dark section-view-all max-[700px]:min-h-[42px]! max-[700px]:gap-[9px]! max-[700px]:px-3! max-[700px]:py-2.5! max-[700px]:text-[10px]! max-[700px]:whitespace-nowrap!"
+              className="inline-flex min-h-[52px] w-fit shrink-0 items-center justify-center gap-6 rounded-full border border-transparent bg-[var(--color-sun)] px-6 py-3.5 text-sm font-semibold text-[var(--color-forest)] transition-[transform,background-color,box-shadow] duration-[250ms] hover:-translate-y-[3px] hover:bg-[var(--color-lime)] hover:shadow-[0_6px_0_#19332a15] [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-[250ms] hover:[&_svg]:rotate-45 max-[700px]:min-h-[42px] max-[700px]:gap-[9px] max-[700px]:px-3 max-[700px]:py-2.5 max-[700px]:text-[10px] max-[700px]:whitespace-nowrap"
               href="/services"
             >
               View all services <ArrowUpRight size={19} aria-hidden="true" />
@@ -227,7 +227,7 @@ export default async function HomePage() {
           </div>
         </section>
         <section className="featured-diets section-pad" aria-labelledby="featured-diets-title">
-          <Reveal className="section-heading max-[700px]:flex! max-[700px]:items-end! max-[700px]:gap-3!">
+          <Reveal className="mb-12 flex items-end justify-between gap-10 max-[700px]:mb-[30px] max-[700px]:gap-3">
             <div className="max-[700px]:min-w-0 max-[700px]:flex-1">
               <p className="eyebrow">Featured diets</p>
               <h2
@@ -238,7 +238,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <Link
-              className="pill pill-dark section-view-all max-[700px]:min-h-[42px]! max-[700px]:gap-[9px]! max-[700px]:px-3! max-[700px]:py-2.5! max-[700px]:text-[10px]! max-[700px]:whitespace-nowrap!"
+              className="inline-flex min-h-[52px] w-fit shrink-0 items-center justify-center gap-6 rounded-full border border-transparent bg-[var(--color-forest)] px-6 py-3.5 text-sm font-semibold text-[var(--color-cream)] transition-[transform,background-color,box-shadow] duration-[250ms] hover:-translate-y-[3px] hover:bg-[#315442] hover:shadow-[0_6px_0_#19332a15] [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-[250ms] hover:[&_svg]:rotate-45 max-[700px]:min-h-[42px] max-[700px]:gap-[9px] max-[700px]:px-3 max-[700px]:py-2.5 max-[700px]:text-[10px] max-[700px]:whitespace-nowrap"
               href="/diets"
             >
               View all diets <ArrowUpRight size={19} aria-hidden="true" />

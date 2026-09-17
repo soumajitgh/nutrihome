@@ -18,12 +18,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
 }
-.nutri-site .section-view-all {
-  min-height: 52px;
-  flex-shrink: 0;
-  font-size: 14px;
-  gap: 24px;
-}
 @media (max-width: 800px) {
   .featured-diets-grid {
     grid-template-columns: 1fr;
@@ -77,10 +71,6 @@
 .diet-card:focus-visible {
   outline: 3px solid var(--color-forest);
   outline-offset: 6px;
-}
-.services-section .section-view-all {
-  background: var(--color-sun);
-  color: var(--color-forest);
 }
 .diet-empty {
   background: var(--color-lime-soft);
@@ -634,32 +624,6 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-.values-ribbon {
-  padding: 22px 5%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 25px;
-  background: var(--color-lime);
-  border-block: 1px solid #19332a20;
-}
-.values-ribbon span {
-  font-family: var(--font-serif);
-  font-size: clamp(20px, 2.3vw, 31px);
-  white-space: nowrap;
-}
-.ribbon-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  min-width: 0;
-}
-.values-ribbon svg {
-  width: 28px;
-  flex-shrink: 0;
-  color: var(--color-forest);
-}
 .approach-heading {
   text-align: center;
 }
@@ -714,19 +678,6 @@
   background: var(--color-forest);
   color: var(--color-cream);
   border-radius: 34px 34px 0 0;
-}
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 40px;
-  margin-bottom: 48px;
-}
-.section-heading > p {
-  max-width: 285px;
-  font-size: 13px;
-  opacity: 0.8;
-  margin-bottom: 5px;
 }
 .services-section h2 em {
   color: var(--color-lime);
@@ -1443,15 +1394,6 @@
   }
   .services-section {
     border-radius: 24px 24px 0 0;
-  }
-  .section-heading {
-    display: block;
-    margin-bottom: 30px;
-  }
-  .section-heading > p {
-    margin-top: 20px;
-    max-width: 380px;
-    font-size: 13px;
   }
   .service-grid,
   .expertise-grid {

@@ -55,14 +55,16 @@ export default async function About() {
           </Reveal>
         </section>
         <section className="about-expertise section-pad" id="specialties">
-          <Reveal className="section-heading">
+          <Reveal className="mb-12 flex items-end justify-between gap-10 max-[700px]:mb-[30px] max-[700px]:block">
             <div>
               <p className="eyebrow">How I can help</p>
               <h2>
                 How I can <em>help you.</em>
               </h2>
             </div>
-            <p>Support with digestion, health conditions, and everyday eating habits.</p>
+            <p className="mb-[5px] max-w-[285px] text-[13px] opacity-80 max-[700px]:mt-5 max-[700px]:max-w-[380px]">
+              Support with digestion, health conditions, and everyday eating habits.
+            </p>
           </Reveal>
           <div className="expertise-grid">
             {about.specialties.map((specialty, i) => (
@@ -93,14 +95,16 @@ export default async function About() {
           id="experience"
           aria-labelledby="experience-heading"
         >
-          <Reveal className="section-heading">
+          <Reveal className="mb-12 flex items-end justify-between gap-10 max-[700px]:mb-[30px] max-[700px]:block">
             <div>
               <p className="eyebrow">Professional experience</p>
               <h2 id="experience-heading">
                 My <em>experience.</em>
               </h2>
             </div>
-            <p>I have worked with people in hospitals, online, and in one-to-one consultations.</p>
+            <p className="mb-[5px] max-w-[285px] text-[13px] opacity-80 max-[700px]:mt-5 max-[700px]:max-w-[380px]">
+              I have worked with people in hospitals, online, and in one-to-one consultations.
+            </p>
           </Reveal>
           <div className="professional-timeline">
             {about.experience.map((position, index) => (

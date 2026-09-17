@@ -251,7 +251,7 @@ export function SiteFooter() {
           </nav>
           <div className="flex flex-col items-end gap-3 max-[900px]:col-span-2 max-[900px]:flex-row max-[900px]:items-center max-[900px]:justify-between">
             <Link
-              className="pill pill-dark min-h-[43px]! gap-4! px-[17px]! py-2.5! text-[11px]! max-[700px]:min-h-10!"
+              className="inline-flex min-h-[43px] w-fit items-center justify-center gap-4 rounded-full border border-transparent bg-[var(--color-forest)] px-[17px] py-2.5 text-[11px] font-semibold text-[var(--color-cream)] transition-[transform,background-color,box-shadow] duration-[250ms] hover:-translate-y-[3px] hover:bg-[#315442] hover:shadow-[0_6px_0_#19332a15] [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-[250ms] hover:[&_svg]:rotate-45 max-[700px]:min-h-10"
               href="/book-a-consultation"
             >
               Book a call <ArrowUpRight size={16} aria-hidden="true" />
