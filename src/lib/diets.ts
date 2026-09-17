@@ -8,7 +8,7 @@ export const dietCategories = {
   wellbeing: 'Food & wellbeing',
 }
 
-export async function getDiets(page = 1) {
+export const getDiets = cache(async (page = 1) => {
   try {
     const payload = await getPayload({ config })
     return await payload.find({
@@ -34,7 +34,7 @@ export async function getDiets(page = 1) {
       nextPage: null,
     }
   }
-}
+})
 
 export const getDiet = cache(async (slug: string) => {
   try {

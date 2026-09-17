@@ -4,12 +4,21 @@ import { ArrowUpRight } from 'lucide-react'
 import { SiteHeader, SiteFooter } from '@/components/site/design'
 import { getDiets } from '@/lib/diets'
 import { DietCard } from '@/components/site/DietCard'
+import { mediaImage } from '@/lib/content-image'
+import { createPageMetadata } from '@/lib/metadata'
 
 export const dynamic = 'force-dynamic'
-export const metadata: Metadata = {
-  title: 'Diets | Nutrihome',
-  description:
-    'A food diary for real life. Explore kitchen stories, everyday meals, and nutrition with Bidisha.',
+
+export async function generateMetadata(): Promise<Metadata> {
+  const episodes = await getDiets(1)
+
+  return createPageMetadata({
+    title: 'Diets',
+    description:
+      'A food diary for real life. Explore kitchen stories, everyday meals, and nutrition with Bidisha.',
+    path: '/diets',
+    image: episodes.docs[0] ? mediaImage(episodes.docs[0].cover) : null,
+  })
 }
 
 export default async function DietsPage({

@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Service } from '@/payload-types'
@@ -41,7 +42,7 @@ export async function getFeaturedServices(): Promise<Service[]> {
   }
 }
 
-export async function getAllServices(): Promise<Service[]> {
+export const getAllServices = cache(async (): Promise<Service[]> => {
   try {
     const payload = await getPayload({ config })
     await seedInitialData(payload)
@@ -61,9 +62,9 @@ export async function getAllServices(): Promise<Service[]> {
     console.error('Failed to get all services from Payload:', error)
     return []
   }
-}
+})
 
-export async function getServiceBySlug(slug: string): Promise<Service | null> {
+export const getServiceBySlug = cache(async (slug: string): Promise<Service | null> => {
   try {
     const payload = await getPayload({ config })
     await seedInitialData(payload)
@@ -81,4 +82,4 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
     console.error(`Failed to get service with slug ${slug}:`, error)
     return null
   }
-}
+})

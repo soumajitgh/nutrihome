@@ -1,14 +1,26 @@
+import type { Metadata } from 'next'
 import { ArrowDown, ArrowUpRight, Leaf } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Contact, Flower, Portrait, Reveal, SiteFooter, SiteHeader } from '@/components/site/design'
 import { getAboutContent } from '@/lib/about-content'
 import { getFeaturedServices } from '@/lib/services'
-import { contentImage } from '@/lib/content-image'
+import { contentImage, mediaImage } from '@/lib/content-image'
 import { getDiets } from '@/lib/diets'
 import { DietCard } from '@/components/site/DietCard'
+import { createPageMetadata, ogImage } from '@/lib/metadata'
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const about = await getAboutContent()
+
+  return createPageMetadata({
+    title: 'Nutrihome',
+    path: '/',
+    image: mediaImage(about.introduction.portrait) || ogImage,
+  })
+}
 
 const foodImages = [
   'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=85',
@@ -82,7 +94,7 @@ export default async function HomePage() {
         <section className="hello-section section-pad" id="about-bidisha">
           <Reveal className="hello-photo">
             <Image
-              src="/home/holding_fruits.png"
+              src="/home/holding_fruits.webp"
               alt={`${about.introduction.name} holding a colourful selection of fresh fruit and vegetables`}
               width={1122}
               height={1402}

@@ -1,13 +1,9 @@
-import type { Metadata } from 'next'
 import React from 'react'
 
+import { baseMetadata } from '@/lib/metadata'
 import './styles.css'
 
-export const metadata: Metadata = {
-  description:
-    'Personalised, practical nutrition support to help you feel confident and at home with food.',
-  title: 'Nutrihome | Feel Good About Food',
-}
+export const metadata = baseMetadata
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

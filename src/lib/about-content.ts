@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { AboutPage } from '@/payload-types'
@@ -5,7 +6,7 @@ import { aboutPageSeedData } from '@/seed/aboutPageData'
 
 export type AboutContent = Omit<AboutPage, 'createdAt' | 'id' | 'updatedAt'>
 
-export async function getAboutContent(): Promise<AboutContent> {
+export const getAboutContent = cache(async (): Promise<AboutContent> => {
   try {
     const payload = await getPayload({ config })
     const page = await payload.findGlobal({ slug: 'about-page', depth: 1 })
@@ -23,4 +24,4 @@ export async function getAboutContent(): Promise<AboutContent> {
   } catch {
     return aboutPageSeedData
   }
-}
+})

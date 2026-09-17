@@ -1,11 +1,15 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SiteHeader, SiteFooter } from '@/components/site/design'
 import { getAllServices } from '@/lib/services'
 import { ConsultationBooking } from '@/components/services/ConsultationBooking'
+import { createPageMetadata } from '@/lib/metadata'
 
 export const dynamic = 'force-dynamic'
-export const metadata: Metadata = { title: 'Book a consultation | Nutrihome' }
+export const metadata = createPageMetadata({
+  title: 'Book a consultation',
+  description: 'Choose a personalised nutrition service, find a time, and share your details.',
+  path: '/book-a-consultation',
+})
 
 export default async function BookingPage({
   searchParams,

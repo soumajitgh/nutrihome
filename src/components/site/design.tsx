@@ -43,7 +43,7 @@ export function SiteHeader() {
       </a>
       <div className="header-inner">
         <Link className="brand" href="/" aria-label="Nutrihome home" onClick={() => setOpen(false)}>
-          <Image src="/brand/nutrihome-logo.png" alt="Nutrihome" width={112} height={62} />
+          <Image src="/brand/nutrihome-logo.webp" alt="Nutrihome" width={112} height={62} />
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
           <Link href="/" aria-current={pathname === '/' ? 'page' : undefined}>
@@ -142,7 +142,7 @@ export function Portrait({ about, compact = false }: { about: AboutContent; comp
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [-16, 16])
   const portrait = about.introduction.portrait
-  const src = typeof portrait === 'object' && portrait?.url ? portrait.url : '/home/hero.png'
+  const src = typeof portrait === 'object' && portrait?.url ? portrait.url : '/home/hero.webp'
   return (
     <div ref={ref} className={`portrait-composition ${compact ? 'portrait-compact' : ''}`}>
       <div className="portrait-orbit" aria-hidden="true" />
@@ -221,7 +221,7 @@ export function SiteFooter() {
             <Link href="/" aria-label="Nutrihome home">
               <Image
                 className="h-auto w-[100px] object-contain max-[700px]:w-[78px]"
-                src="/brand/nutrihome-logo.png"
+                src="/brand/nutrihome-logo.webp"
                 alt="Nutrihome"
                 width={112}
                 height={61}

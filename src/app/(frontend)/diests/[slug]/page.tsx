@@ -5,17 +5,22 @@ import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SiteHeader, SiteFooter } from '@/components/site/design'
 import { dietCategories, getDiet } from '@/lib/diets'
-import { contentImage } from '@/lib/content-image'
+import { contentImage, mediaImage } from '@/lib/content-image'
+import { createPageMetadata } from '@/lib/metadata'
 
 export const dynamic = 'force-dynamic'
 type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const episode = await getDiet((await params).slug)
-  return {
-    title: `${episode?.title || 'Episode not found'} | Nutrihome`,
+  const { slug } = await params
+  const episode = await getDiet(slug)
+
+  return createPageMetadata({
+    title: episode?.title || 'Episode Not Found',
     description: episode?.excerpt,
-    alternates: { canonical: `/diets/${encodeURIComponent((await params).slug)}` },
-  }
+    path: `/diets/${encodeURIComponent(slug)}`,
+    image: mediaImage(episode?.cover),
+    type: 'article',
+  })
 }
 
 export default async function DietEpisode({ params }: Props) {

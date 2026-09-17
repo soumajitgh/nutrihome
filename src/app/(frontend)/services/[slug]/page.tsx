@@ -6,7 +6,8 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { SiteFooter, SiteHeader } from '@/components/site/design'
 import { getServiceBySlug } from '@/lib/services'
-import { contentImage } from '@/lib/content-image'
+import { contentImage, mediaImage } from '@/lib/content-image'
+import { createPageMetadata } from '@/lib/metadata'
 
 export const dynamic = 'force-dynamic'
 interface ServicePageProps {
@@ -14,11 +15,15 @@ interface ServicePageProps {
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const service = await getServiceBySlug((await params).slug)
-  return {
-    title: `${service?.title || 'Service Not Found'} | Nutrihome`,
+  const { slug } = await params
+  const service = await getServiceBySlug(slug)
+
+  return createPageMetadata({
+    title: service?.title || 'Service Not Found',
     description: service?.description,
-  }
+    path: `/services/${encodeURIComponent(slug)}`,
+    image: mediaImage(service?.image),
+  })
 }
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {

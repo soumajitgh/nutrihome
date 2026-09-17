@@ -2,12 +2,21 @@ import type { Metadata } from 'next'
 import { ArrowUpRight, MapPin, Plus } from 'lucide-react'
 import { Contact, Portrait, Reveal, SiteFooter, SiteHeader } from '@/components/site/design'
 import { getAboutContent } from '@/lib/about-content'
+import { mediaImage } from '@/lib/content-image'
+import { createPageMetadata, ogImage } from '@/lib/metadata'
 
 export const dynamic = 'force-dynamic'
-export const metadata: Metadata = {
-  title: 'About Bidisha Das | Nutrihome',
-  description:
-    'Meet Bidisha Das, a clinical nutritionist and gut health expert specialising in practical, personalised nutrition care.',
+
+export async function generateMetadata(): Promise<Metadata> {
+  const about = await getAboutContent()
+
+  return createPageMetadata({
+    title: `About ${about.introduction.name}`,
+    description:
+      'Meet Bidisha Das, a clinical nutritionist and gut health expert specialising in practical, personalised nutrition care.',
+    path: '/about',
+    image: mediaImage(about.introduction.portrait) || ogImage,
+  })
 }
 
 export default async function About() {

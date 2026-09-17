@@ -4,14 +4,21 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal, SiteFooter, SiteHeader } from '@/components/site/design'
 import { getAllServices } from '@/lib/services'
-import { contentImage } from '@/lib/content-image'
+import { contentImage, mediaImage } from '@/lib/content-image'
+import { createPageMetadata } from '@/lib/metadata'
 
 export const dynamic = 'force-dynamic'
 
-export const metadata: Metadata = {
-  title: 'Services & Consultations | Nutrihome',
-  description:
-    'Explore our personalised nutrition consultations, meal planning guides, and workplace wellness sessions.',
+export async function generateMetadata(): Promise<Metadata> {
+  const services = await getAllServices()
+
+  return createPageMetadata({
+    title: 'Services & Consultations',
+    description:
+      'Explore our personalised nutrition consultations, meal planning guides, and workplace wellness sessions.',
+    path: '/services',
+    image: services[0] ? mediaImage(services[0].image) : null,
+  })
 }
 
 export default async function ServicesPage() {
