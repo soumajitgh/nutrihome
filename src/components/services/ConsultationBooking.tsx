@@ -2,12 +2,15 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { Service } from '@/payload-types'
 import { BookingWidget } from './BookingWidget'
 
 interface ServiceOption {
   id: number
   title: string
   slug: string
+  body: Service['body']
 }
 
 export function ConsultationBooking({
@@ -44,7 +47,21 @@ export function ConsultationBooking({
         </select>
         <h2 className="mt-8 text-[26px]!">{selected.title}</h2>
         <p>30-minute consultation</p>
-        <Link className="inline-block py-3 text-sm" href={`/services/${selected.slug}`}>
+        {selected.body && (
+          <div className="relative mt-6 max-h-[260px] overflow-hidden pr-3 text-sm leading-7 text-[#536152]">
+            <div className="[&_blockquote]:my-5 [&_blockquote]:border-l-2 [&_blockquote]:border-[var(--color-forest)] [&_blockquote]:pl-4 [&_blockquote]:font-serif [&_blockquote]:italic [&_h2]:mb-3 [&_h2]:mt-6 [&_h2]:font-serif [&_h2]:text-xl [&_h3]:mb-2 [&_h3]:mt-5 [&_h3]:font-serif [&_h3]:text-lg [&_li]:mb-1 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5">
+              <RichText data={selected.body} />
+            </div>
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--color-cream)] via-[var(--color-cream)]/90 to-transparent"
+              aria-hidden="true"
+            />
+          </div>
+        )}
+        <Link
+          className="inline-block py-3 text-sm underline-offset-4 hover:underline"
+          href={`/services/${selected.slug}`}
+        >
           Read about this service →
         </Link>
       </div>

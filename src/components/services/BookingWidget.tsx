@@ -272,10 +272,7 @@ export function BookingWidget({ service }: BookingWidgetProps) {
         >
           <CalendarIcon size={14} /> Your next step
         </div>
-        <h3 className="mt-2 text-[28px]!">Book your consultation</h3>
-        <p style={{ fontSize: '13px', opacity: 0.9, marginTop: '4px', margin: 0 }}>
-          30-minute consultation
-        </p>
+        <p className="mt-1 mb-0 text-[13px] opacity-90">30-minute consultation</p>
       </div>
 
       <div className="booking-widget-body p-[18px]! sm:p-7!">
