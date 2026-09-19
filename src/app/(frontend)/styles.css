@@ -1140,13 +1140,8 @@
   font-size: 12px;
   font-weight: 700;
 }
-.position-date p {
-  font-size: 12px;
-  font-weight: 700;
-}
 .position-location {
   display: block;
-  margin-top: 5px;
   font-size: 12px;
 }
 .position-content {

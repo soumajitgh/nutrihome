@@ -123,9 +123,6 @@ export default async function About() {
                     <span className="position-number" aria-hidden="true">
                       0{index + 1}
                     </span>
-                    <p>
-                      {position.startDate} — {position.endDate}
-                    </p>
                     <span className="position-location">{position.location}</span>
                   </div>
                   <div className="position-content">
